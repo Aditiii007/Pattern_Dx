@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>PatternDx — Student Diagnostic System</title>
+<title>PatternDx  Student Diagnostic System</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
 
@@ -251,7 +251,7 @@
     <div class="sidebar-label">Student Cohort</div>
     <div id="student-list"></div>
     <div class="sidebar-note">
-      <strong>Rule-based classifier</strong> — patterns are derived from 45 behavioural
+      <strong>Rule-based classifier</strong>  patterns are derived from 45 behavioural
       features extracted from OULAD-style data. In the full system, these rules
       are replaced by trained ML models (RF, XGBoost, SHAP).
     </div>
@@ -301,7 +301,7 @@ const PATTERNS = {
   "Ghost": {
     color:"#64748B", lightBg:"#F8FAFC", border:"#CBD5E1",
     emoji:"👻", riskLevel:"Critical",
-    desc:"This student has registered but is almost entirely absent from the virtual learning environment. Engagement is too sparse to distinguish academic difficulty from disengagement — the system cannot tell if they are struggling or have simply stopped attending. This is categorically different from a binary 'at-risk' flag because it implies an outreach or welfare check is needed, not academic support.",
+    desc:"This student has registered but is almost entirely absent from the virtual learning environment. Engagement is too sparse to distinguish academic difficulty from disengagement  the system cannot tell if they are struggling or have simply stopped attending. This is categorically different from a binary 'at-risk' flag because it implies an outreach or welfare check is needed, not academic support.",
     interventions:[
       { type:"Primary", badge:"bg:#FEE2E2;color:#991B1B", action:"Immediate pastoral welfare contact within 48 hours", rationale:"Near-zero activity may indicate personal crisis, registration error, or complete dropout intent. Academic support is premature without first establishing contact." },
       { type:"Secondary", badge:"bg:#FEF3C7;color:#92400E", action:"Check registration system for any withdrawal flags", rationale:"Students who have informally stopped attending often appear in data before formal withdrawal is processed." },
@@ -311,7 +311,7 @@ const PATTERNS = {
   "Procrastinator": {
     color:"#B45309", lightBg:"#FFFBEB", border:"#FCD34D",
     emoji:"⏰", riskLevel:"High",
-    desc:"This student shows strong pre-deadline activity spikes with very low engagement between assignments. Erratic engagement (high coefficient of variation) combined with late submissions reveals a time management pattern rather than a lack of motivation or ability. This is distinct from a disengaging student because overall click volume may be reasonable — the problem is scheduling, not effort.",
+    desc:"This student shows strong pre-deadline activity spikes with very low engagement between assignments. Erratic engagement (high coefficient of variation) combined with late submissions reveals a time management pattern rather than a lack of motivation or ability. This is distinct from a disengaging student because overall click volume may be reasonable  the problem is scheduling, not effort.",
     interventions:[
       { type:"Primary", badge:"bg:#FEF3C7;color:#92400E", action:"Time management coaching and interim deadline scaffolding", rationale:"Procrastinators respond well to structured check-in deadlines that break assignments into earlier sub-tasks, reducing last-minute cramming." },
       { type:"Secondary", badge:"bg:#DBEAFE;color:#1E40AF", action:"Share personalised study planner template", rationale:"Concrete scheduling tools address the behavioural pattern rather than the academic content, which is typically not the root issue." },
@@ -324,27 +324,27 @@ const PATTERNS = {
     desc:"This student demonstrates consistent engagement, high assessment scores, and an improving performance trajectory. Stable week-to-week activity and on-time submission behaviour indicate strong self-regulation. Distinguishing this from a 'not at-risk' binary label is important because high achievers may still benefit from enrichment opportunities or advanced support that generic systems would not flag.",
     interventions:[
       { type:"Primary", badge:"bg:#D1FAE5;color:#065F46", action:"Offer enrichment resources or advanced reading pathways", rationale:"High achievers disengage when under-challenged. Providing extension material maintains motivation and engagement breadth." },
-      { type:"Secondary", badge:"bg:#DBEAFE;color:#1E40AF", action:"Consider peer mentoring or study group leadership role", rationale:"Teaching others consolidates understanding and provides social benefit — both factors associated with continued high achievement." },
-      { type:"Monitor", badge:"bg:#EDE9FE;color:#6B21A8", action:"Watch for sudden engagement drop — high achievers can crash after burnout", rationale:"A sharp decline from a high baseline is a meaningful signal that is easy to miss without pattern-aware monitoring." }
+      { type:"Secondary", badge:"bg:#DBEAFE;color:#1E40AF", action:"Consider peer mentoring or study group leadership role", rationale:"Teaching others consolidates understanding and provides social benefit  both factors associated with continued high achievement." },
+      { type:"Monitor", badge:"bg:#EDE9FE;color:#6B21A8", action:"Watch for sudden engagement drop  high achievers can crash after burnout", rationale:"A sharp decline from a high baseline is a meaningful signal that is easy to miss without pattern-aware monitoring." }
     ]
   },
   "Disengaging": {
     color:"#B91C1C", lightBg:"#FFF5F5", border:"#FECACA",
     emoji:"📉", riskLevel:"High",
-    desc:"This student shows a clear declining trajectory in both engagement and performance over the course. Early activity levels were reasonable but have dropped progressively — a pattern distinct from the Ghost (who never engaged) and the Procrastinator (who has erratic but present activity). The declining trend suggests a student who has become overwhelmed, lost motivation, or encountered external pressures mid-course.",
+    desc:"This student shows a clear declining trajectory in both engagement and performance over the course. Early activity levels were reasonable but have dropped progressively  a pattern distinct from the Ghost (who never engaged) and the Procrastinator (who has erratic but present activity). The declining trend suggests a student who has become overwhelmed, lost motivation, or encountered external pressures mid-course.",
     interventions:[
-      { type:"Primary", badge:"bg:#FEE2E2;color:#991B1B", action:"Personal tutor check-in to identify root cause of decline", rationale:"Declining engagement has multiple possible causes — academic difficulty, personal circumstances, or loss of interest. The intervention must be tailored to the actual cause, which requires a conversation." },
+      { type:"Primary", badge:"bg:#FEE2E2;color:#991B1B", action:"Personal tutor check-in to identify root cause of decline", rationale:"Declining engagement has multiple possible causes  academic difficulty, personal circumstances, or loss of interest. The intervention must be tailored to the actual cause, which requires a conversation." },
       { type:"Secondary", badge:"bg:#FEF3C7;color:#92400E", action:"Offer academic support referral and workload review", rationale:"If the decline correlates with a particularly heavy assessment period, temporary workload support or extension may prevent full withdrawal." },
-      { type:"Monitor", badge:"bg:#EDE9FE;color:#6B21A8", action:"Track weekly click count and score trend weekly", rationale:"Stabilisation of the declining engagement trend — even without recovery — indicates the intervention has had effect." }
+      { type:"Monitor", badge:"bg:#EDE9FE;color:#6B21A8", action:"Track weekly click count and score trend weekly", rationale:"Stabilisation of the declining engagement trend  even without recovery  indicates the intervention has had effect." }
     ]
   },
   "Conceptual Struggler": {
     color:"#7C3AED", lightBg:"#F5F3FF", border:"#C4B5FD",
     emoji:"🧩", riskLevel:"Medium",
-    desc:"This student is consistently engaged — submitting assignments on time and logging in regularly — but scores remain low throughout the course with no improving trend. This pattern is the most diagnostically important and the hardest for binary systems to handle: the student does not look disengaged, yet is academically failing. The problem is comprehension, not commitment.",
+    desc:"This student is consistently engaged  submitting assignments on time and logging in regularly  but scores remain low throughout the course with no improving trend. This pattern is the most diagnostically important and the hardest for binary systems to handle: the student does not look disengaged, yet is academically failing. The problem is comprehension, not commitment.",
     interventions:[
       { type:"Primary", badge:"bg:#EDE9FE;color:#6B21A8", action:"Targeted academic support: tutoring sessions focused on assessed concepts", rationale:"High engagement with low scores indicates the student is trying but not understanding. Tutoring addresses the specific conceptual gaps rather than motivation." },
-      { type:"Secondary", badge:"bg:#DBEAFE;color:#1E40AF", action:"Review learning materials for accessibility — consider alternative explanations or worked examples", rationale:"Some students engage heavily with materials that are not pitched at the right level. Supplementary resources at a different register may unlock understanding." },
+      { type:"Secondary", badge:"bg:#DBEAFE;color:#1E40AF", action:"Review learning materials for accessibility  consider alternative explanations or worked examples", rationale:"Some students engage heavily with materials that are not pitched at the right level. Supplementary resources at a different register may unlock understanding." },
       { type:"Monitor", badge:"bg:#D1FAE5;color:#065F46", action:"Track score improvement rate across successive assessments", rationale:"Even a small positive score trend following tutoring indicates the conceptual gap is being addressed." }
     ]
   }
@@ -363,31 +363,31 @@ function classify(m) {
   if (m.clicks < 300 && m.submitRate < 0.55 && m.activeWeeks <= 3) {
     const conf = Math.min(95, 70 + (300 - m.clicks) / 10);
     return { name:"Ghost", conf:Math.round(conf), riskScore: 90,
-      signals:["Total VLE clicks critically low ("+m.clicks+")", "Only "+m.activeWeeks+" active weeks out of 10", "Assignment submission rate "+Math.round(m.submitRate*100)+"% — majority missed"] };
+      signals:["Total VLE clicks critically low ("+m.clicks+")", "Only "+m.activeWeeks+" active weeks out of 10", "Assignment submission rate "+Math.round(m.submitRate*100)+"%  majority missed"] };
   }
   // High achiever
   if (m.score1 >= 80 && m.scoreTrend >= 0 && m.submitRate >= 0.95 && m.cov < 0.6) {
     const conf = Math.min(96, 75 + m.score1 * 0.2 + m.forum * 0.3);
     return { name:"High Achiever", conf:Math.round(conf), riskScore: 8,
-      signals:["First assessment score "+m.score1+"% — strong baseline", "Positive score trend (+"+m.scoreTrend+" pts/assessment)", "Engagement consistency CoV="+m.cov+" — very regular"] };
+      signals:["First assessment score "+m.score1+"%  strong baseline", "Positive score trend (+"+m.scoreTrend+" pts/assessment)", "Engagement consistency CoV="+m.cov+"  very regular"] };
   }
   // Procrastinator: high CoV + late submissions
   if (m.cov >= 1.4 && m.late >= 2) {
     const conf = Math.min(93, 60 + m.cov * 12 + m.late * 4);
     return { name:"Procrastinator", conf:Math.round(conf), riskScore: 62,
-      signals:["High engagement variability: CoV="+m.cov+" (pre-deadline spikes visible)", m.late+" late submissions — consistent deadline pressure pattern", "Irregular weekly activity suggests reactive rather than proactive study"] };
+      signals:["High engagement variability: CoV="+m.cov+" (pre-deadline spikes visible)", m.late+" late submissions  consistent deadline pressure pattern", "Irregular weekly activity suggests reactive rather than proactive study"] };
   }
   // Disengaging: clear weekly decline + low recent activity
   if (weeklyDecline > 0.35 && m.scoreTrend < -1.5) {
     const conf = Math.min(92, 55 + weeklyDecline * 80 + Math.abs(m.scoreTrend) * 3);
     return { name:"Disengaging", conf:Math.round(conf), riskScore: 75,
-      signals:["Weekly engagement declining (first-half avg "+Math.round(firstHalf)+" → second-half "+Math.round(secondHalf)+" clicks)", "Score trend: "+m.scoreTrend+" pts/assessment — progressively worsening", "Pattern consistent with mid-course overwhelm or loss of motivation"] };
+      signals:["Weekly engagement declining (first-half avg "+Math.round(firstHalf)+" → second-half "+Math.round(secondHalf)+" clicks)", "Score trend: "+m.scoreTrend+" pts/assessment  progressively worsening", "Pattern consistent with mid-course overwhelm or loss of motivation"] };
   }
   // Conceptual struggler: engaged but low scores
   if (m.cov < 0.8 && m.score1 < 62 && m.clicks > 800) {
     const conf = Math.min(91, 55 + (62 - m.score1) * 0.8 + (1 - m.cov) * 20);
     return { name:"Conceptual Struggler", conf:Math.round(conf), riskScore: 55,
-      signals:["First score "+m.score1+"% despite "+m.clicks+" VLE interactions — effort is present", "Score trend "+m.scoreTrend+" pts/assessment — no self-correction", "Consistent engagement (CoV="+m.cov+") rules out motivation as primary issue"] };
+      signals:["First score "+m.score1+"% despite "+m.clicks+" VLE interactions  effort is present", "Score trend "+m.scoreTrend+" pts/assessment  no self-correction", "Consistent engagement (CoV="+m.cov+") rules out motivation as primary issue"] };
   }
   // Default: disengaging with moderate signals
   const conf = Math.max(55, Math.min(85, 60 + weeklyDecline * 40));
@@ -570,7 +570,7 @@ function renderMain(s, result, pat) {
         <div style="margin-top:12px;font-size:24px;font-weight:800;color:${riskColor}">${result.riskScore} / 100</div>
       </div>
       <div class="card card-inner">
-        <div class="chart-label" style="margin-bottom:10px">Prognosis — if no action taken</div>
+        <div class="chart-label" style="margin-bottom:10px">Prognosis  if no action taken</div>
         <div class="prognosis-text">${getPrognosis(result.name, s.m)}</div>
       </div>
     </div>
@@ -582,7 +582,7 @@ function getPrognosis(name, m) {
   const p = {
     "Ghost": `Based on the current engagement level of ${m.clicks} clicks and ${Math.round(m.submitRate*100)}% submission rate, this student is highly likely to formally withdraw within the next 2–3 weeks if no contact is made. Historical OULAD data shows ghost-pattern students have a 72% withdrawal rate without intervention.`,
     "Procrastinator": `Without time management support, this student will likely continue the pre-deadline cramming pattern, which historically correlates with declining scores over the course as assessment complexity increases. Probability of passing drops from approximately 60% to 38% if the pattern continues unchanged.`,
-    "High Achiever": `Trajectory strongly indicates a Pass or Distinction outcome. The primary risk is complacency or mid-course burnout if workload spikes. Current data suggests no immediate intervention is required — monitoring for any engagement drop is sufficient.`,
+    "High Achiever": `Trajectory strongly indicates a Pass or Distinction outcome. The primary risk is complacency or mid-course burnout if workload spikes. Current data suggests no immediate intervention is required  monitoring for any engagement drop is sufficient.`,
     "Disengaging": `The declining engagement and score trajectory, if continued, project to a Fail or Withdrawal outcome by week 8–10. Historical data from similar profiles in OULAD shows 65% probability of non-completion without intervention at this stage.`,
     "Conceptual Struggler": `Without academic support, this student will likely fail individual assessments despite continued engagement. There is a moderate risk (approximately 45%) of withdrawal following a particularly poor result. Early tutoring significantly improves outcomes for this profile.`
   };
