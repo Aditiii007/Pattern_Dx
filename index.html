@@ -300,7 +300,7 @@ const STUDENTS = [
 const PATTERNS = {
   "Ghost": {
     color:"#64748B", lightBg:"#F8FAFC", border:"#CBD5E1",
-    emoji:"👻", riskLevel:"Critical",
+    riskLevel:"Critical",
     desc:"This student has registered but is almost entirely absent from the virtual learning environment. Engagement is too sparse to distinguish academic difficulty from disengagement  the system cannot tell if they are struggling or have simply stopped attending. This is categorically different from a binary 'at-risk' flag because it implies an outreach or welfare check is needed, not academic support.",
     interventions:[
       { type:"Primary", badge:"bg:#FEE2E2;color:#991B1B", action:"Immediate pastoral welfare contact within 48 hours", rationale:"Near-zero activity may indicate personal crisis, registration error, or complete dropout intent. Academic support is premature without first establishing contact." },
@@ -310,7 +310,7 @@ const PATTERNS = {
   },
   "Procrastinator": {
     color:"#B45309", lightBg:"#FFFBEB", border:"#FCD34D",
-    emoji:"⏰", riskLevel:"High",
+    riskLevel:"High",
     desc:"This student shows strong pre-deadline activity spikes with very low engagement between assignments. Erratic engagement (high coefficient of variation) combined with late submissions reveals a time management pattern rather than a lack of motivation or ability. This is distinct from a disengaging student because overall click volume may be reasonable  the problem is scheduling, not effort.",
     interventions:[
       { type:"Primary", badge:"bg:#FEF3C7;color:#92400E", action:"Time management coaching and interim deadline scaffolding", rationale:"Procrastinators respond well to structured check-in deadlines that break assignments into earlier sub-tasks, reducing last-minute cramming." },
@@ -320,7 +320,7 @@ const PATTERNS = {
   },
   "High Achiever": {
     color:"#0F766E", lightBg:"#F0FDFA", border:"#99F6E4",
-    emoji:"🎯", riskLevel:"Low",
+    riskLevel:"Low",
     desc:"This student demonstrates consistent engagement, high assessment scores, and an improving performance trajectory. Stable week-to-week activity and on-time submission behaviour indicate strong self-regulation. Distinguishing this from a 'not at-risk' binary label is important because high achievers may still benefit from enrichment opportunities or advanced support that generic systems would not flag.",
     interventions:[
       { type:"Primary", badge:"bg:#D1FAE5;color:#065F46", action:"Offer enrichment resources or advanced reading pathways", rationale:"High achievers disengage when under-challenged. Providing extension material maintains motivation and engagement breadth." },
@@ -330,7 +330,7 @@ const PATTERNS = {
   },
   "Disengaging": {
     color:"#B91C1C", lightBg:"#FFF5F5", border:"#FECACA",
-    emoji:"📉", riskLevel:"High",
+    riskLevel:"High",
     desc:"This student shows a clear declining trajectory in both engagement and performance over the course. Early activity levels were reasonable but have dropped progressively  a pattern distinct from the Ghost (who never engaged) and the Procrastinator (who has erratic but present activity). The declining trend suggests a student who has become overwhelmed, lost motivation, or encountered external pressures mid-course.",
     interventions:[
       { type:"Primary", badge:"bg:#FEE2E2;color:#991B1B", action:"Personal tutor check-in to identify root cause of decline", rationale:"Declining engagement has multiple possible causes  academic difficulty, personal circumstances, or loss of interest. The intervention must be tailored to the actual cause, which requires a conversation." },
@@ -340,7 +340,7 @@ const PATTERNS = {
   },
   "Conceptual Struggler": {
     color:"#7C3AED", lightBg:"#F5F3FF", border:"#C4B5FD",
-    emoji:"🧩", riskLevel:"Medium",
+    riskLevel:"Medium",
     desc:"This student is consistently engaged  submitting assignments on time and logging in regularly  but scores remain low throughout the course with no improving trend. This pattern is the most diagnostically important and the hardest for binary systems to handle: the student does not look disengaged, yet is academically failing. The problem is comprehension, not commitment.",
     interventions:[
       { type:"Primary", badge:"bg:#EDE9FE;color:#6B21A8", action:"Targeted academic support: tutoring sessions focused on assessed concepts", rationale:"High engagement with low scores indicates the student is trying but not understanding. Tutoring addresses the specific conceptual gaps rather than motivation." },
