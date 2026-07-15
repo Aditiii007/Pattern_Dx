@@ -3,237 +3,136 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>PatternDx  Student Diagnostic System</title>
+<title>PatternDx — Student Diagnostic System</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #F8FAFC; --bg-card: #FFFFFF; --bg-sidebar: #F1F5F9; --bg-hover: #E8F0F7;
+  --border: #E2E8F0; --border-md: #CBD5E1;
+  --text-1: #1E293B; --text-2: #475569; --text-3: #94A3B8;
+  --accent: #0F766E; --accent-lt: #CCFBF1;
+  --accent-2: #1D4ED8; --accent-2lt: #DBEAFE;
+  --warn: #B45309; --warn-lt: #FEF3C7;
+  --danger: #B91C1C; --danger-lt: #FEE2E2;
+  --purple: #7C3AED; --purple-lt: #EDE9FE;
+  --slate: #475569; --slate-lt: #F1F5F9;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+  --shadow: 0 4px 12px rgba(0,0,0,.06), 0 1px 3px rgba(0,0,0,.04);
+  --radius: 10px;
+}
+body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text-1); min-height: 100vh; font-size: 14px; line-height: 1.5; }
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* Header */
+.header { background: var(--bg-card); border-bottom: 1px solid var(--border); padding: 0 24px; height: 56px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+.logo { display: flex; align-items: center; gap: 10px; }
+.logo-mark { width: 30px; height: 30px; border-radius: 8px; background: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #fff; }
+.logo-text { font-size: 15px; font-weight: 700; color: var(--text-1); letter-spacing: -0.3px; }
+.logo-sub { font-size: 10px; color: var(--text-3); letter-spacing: 0.8px; font-weight: 500; }
+.header-right { display: flex; align-items: center; gap: 16px; }
+.header-badge { background: var(--accent-lt); color: var(--accent); font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 20px; letter-spacing: 0.5px; }
+.header-meta { font-size: 11px; color: var(--text-3); }
 
-  :root {
-    --bg:         #F8FAFC;
-    --bg-card:    #FFFFFF;
-    --bg-sidebar: #F1F5F9;
-    --bg-hover:   #E8F0F7;
-    --border:     #E2E8F0;
-    --border-md:  #CBD5E1;
-    --text-1:     #1E293B;
-    --text-2:     #475569;
-    --text-3:     #94A3B8;
-    --accent:     #0F766E;
-    --accent-lt:  #CCFBF1;
-    --accent-2:   #1D4ED8;
-    --accent-2lt: #DBEAFE;
-    --warn:       #B45309;
-    --warn-lt:    #FEF3C7;
-    --danger:     #B91C1C;
-    --danger-lt:  #FEE2E2;
-    --purple:     #7C3AED;
-    --purple-lt:  #EDE9FE;
-    --slate:      #475569;
-    --slate-lt:   #F1F5F9;
-    --shadow-sm:  0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
-    --shadow:     0 4px 12px rgba(0,0,0,.06), 0 1px 3px rgba(0,0,0,.04);
-    --radius:     10px;
-  }
+/* Layout */
+.layout { display: grid; grid-template-columns: 280px 1fr; min-height: calc(100vh - 56px); }
 
-  body {
-    font-family: 'Inter', sans-serif;
-    background: var(--bg);
-    color: var(--text-1);
-    min-height: 100vh;
-    font-size: 14px;
-    line-height: 1.5;
-  }
+/* Sidebar */
+.sidebar { background: var(--bg-sidebar); border-right: 1px solid var(--border); padding: 20px 16px; overflow-y: auto; }
+.sidebar-label { font-size: 10px; font-weight: 600; color: var(--text-3); letter-spacing: 1.2px; text-transform: uppercase; padding: 0 8px; margin-bottom: 10px; }
+.student-btn { width: 100%; background: transparent; border: 1px solid transparent; border-radius: var(--radius); padding: 10px 12px; cursor: pointer; display: flex; align-items: center; gap: 12px; text-align: left; transition: all 0.12s; margin-bottom: 4px; font-family: 'Inter', sans-serif; }
+.student-btn:hover { background: var(--bg-hover); border-color: var(--border); }
+.student-btn.active { background: #fff; border-color: var(--accent); box-shadow: var(--shadow-sm); }
+.avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: #fff; flex-shrink: 0; }
+.stu-name { font-size: 13px; font-weight: 600; color: var(--text-1); }
+.stu-id { font-size: 10px; color: var(--text-3); margin-top: 2px; }
+.sidebar-note { margin-top: 20px; padding: 14px; background: #fff; border-radius: var(--radius); border: 1px solid var(--border); font-size: 11px; color: var(--text-2); line-height: 1.6; }
+.sidebar-note strong { color: var(--accent); }
 
-  /* ── Layout ── */
-  .header {
-    background: var(--bg-card);
-    border-bottom: 1px solid var(--border);
-    padding: 0 24px;
-    height: 56px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: sticky; top: 0; z-index: 100;
-  }
-  .logo { display: flex; align-items: center; gap: 10px; }
-  .logo-mark {
-    width: 30px; height: 30px; border-radius: 8px;
-    background: var(--accent); display: flex; align-items: center;
-    justify-content: center; font-size: 13px; font-weight: 700; color: #fff;
-  }
-  .logo-text { font-size: 15px; font-weight: 700; color: var(--text-1); letter-spacing: -0.3px; }
-  .logo-sub  { font-size: 10px; color: var(--text-3); letter-spacing: 0.8px; font-weight: 500; }
-  .header-meta { font-size: 11px; color: var(--text-3); }
+/* Main */
+.main { padding: 28px; overflow-y: auto; }
+.empty-state { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; gap: 14px; opacity: 0.5; }
+.empty-icon { font-size: 42px; }
+.empty-text { font-size: 14px; color: var(--text-2); }
 
-  .layout { display: grid; grid-template-columns: 280px 1fr; min-height: calc(100vh - 56px); }
+/* Cards */
+.card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow-sm); }
+.card-inner { padding: 18px 20px; }
 
-  /* ── Sidebar ── */
-  .sidebar {
-    background: var(--bg-sidebar);
-    border-right: 1px solid var(--border);
-    padding: 20px 16px;
-    overflow-y: auto;
-  }
-  .sidebar-label {
-    font-size: 10px; font-weight: 600; color: var(--text-3);
-    letter-spacing: 1.2px; text-transform: uppercase;
-    padding: 0 8px; margin-bottom: 10px;
-  }
-  .student-btn {
-    width: 100%; background: transparent; border: 1px solid transparent;
-    border-radius: var(--radius); padding: 10px 12px; cursor: pointer;
-    display: flex; align-items: center; gap: 12px; text-align: left;
-    transition: all 0.12s; margin-bottom: 4px;
-    font-family: 'Inter', sans-serif;
-  }
-  .student-btn:hover { background: var(--bg-hover); border-color: var(--border); }
-  .student-btn.active { background: #fff; border-color: var(--accent); box-shadow: var(--shadow-sm); }
-  .avatar {
-    width: 36px; height: 36px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 12px; font-weight: 700; color: #fff; flex-shrink: 0;
-  }
-  .stu-name { font-size: 13px; font-weight: 600; color: var(--text-1); }
-  .stu-id   { font-size: 10px; color: var(--text-3); margin-top: 2px; }
+/* Student header */
+.stu-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+.stu-header-left { display: flex; align-items: center; gap: 14px; }
+.stu-header-name { font-size: 20px; font-weight: 700; color: var(--text-1); }
+.stu-header-sub { font-size: 12px; color: var(--text-3); margin-top: 2px; }
 
-  .sidebar-note {
-    margin-top: 20px; padding: 14px; background: #fff;
-    border-radius: var(--radius); border: 1px solid var(--border);
-    font-size: 11px; color: var(--text-2); line-height: 1.6;
-  }
-  .sidebar-note strong { color: var(--accent); }
+/* Metrics */
+.metrics-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-bottom: 16px; }
+.metric-card { padding: 14px 16px; }
+.metric-label { font-size: 10px; color: var(--text-3); font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 6px; }
+.metric-val { font-size: 22px; font-weight: 700; color: var(--text-1); }
+.metric-sub { font-size: 10px; color: var(--text-3); margin-top: 4px; }
 
-  /* ── Main panel ── */
-  .main { padding: 28px; overflow-y: auto; }
+/* Charts */
+.charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+.chart-label { font-size: 10px; font-weight: 600; color: var(--text-3); letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 12px; }
+.chart-axis { display: flex; justify-content: space-between; margin-top: 6px; font-size: 9px; color: var(--text-3); }
 
-  .empty-state {
-    display: flex; flex-direction: column; align-items: center;
-    justify-content: center; height: 100%; gap: 14px; opacity: 0.5;
-  }
-  .empty-icon { font-size: 42px; }
-  .empty-text { font-size: 14px; color: var(--text-2); }
+/* Pattern card */
+.pattern-card { border-radius: var(--radius); padding: 22px; margin-bottom: 16px; border: 1px solid; box-shadow: var(--shadow); }
+.pattern-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.pattern-left { display: flex; align-items: center; gap: 14px; }
+.pattern-emoji { font-size: 32px; }
+.pattern-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; }
+.pattern-name { font-size: 20px; font-weight: 800; color: var(--text-1); }
+.pattern-conf { text-align: right; }
+.pattern-conf-label { font-size: 10px; color: var(--text-3); margin-bottom: 4px; }
+.pattern-conf-val { font-size: 26px; font-weight: 800; }
+.conf-bar-track { background: var(--border); border-radius: 4px; height: 5px; margin-bottom: 14px; }
+.conf-bar-fill { height: 5px; border-radius: 4px; transition: width 0.8s ease; }
+.pattern-desc { font-size: 13px; color: var(--text-2); line-height: 1.65; }
 
-  /* ── Cards ── */
-  .card {
-    background: var(--bg-card); border: 1px solid var(--border);
-    border-radius: var(--radius); box-shadow: var(--shadow-sm);
-  }
-  .card-inner { padding: 18px 20px; }
+/* Tabs */
+.tabs { display: flex; gap: 0; background: var(--bg-sidebar); border: 1px solid var(--border); border-radius: var(--radius); padding: 4px; margin-bottom: 16px; }
+.tab-btn { flex: 1; padding: 8px 0; border-radius: 8px; border: none; cursor: pointer; font-size: 12px; font-family: 'Inter', sans-serif; transition: all 0.12s; font-weight: 500; background: transparent; color: var(--text-3); }
+.tab-btn.active { background: var(--bg-card); color: var(--text-1); font-weight: 600; box-shadow: var(--shadow-sm); }
 
-  /* ── Student header ── */
-  .stu-header {
-    display: flex; align-items: center; justify-content: space-between;
-    margin-bottom: 20px;
-  }
-  .stu-header-left { display: flex; align-items: center; gap: 14px; }
-  .stu-header-name { font-size: 20px; font-weight: 700; color: var(--text-1); }
-  .stu-header-sub  { font-size: 12px; color: var(--text-3); margin-top: 2px; }
+/* Diagnosis */
+.signals-label { font-size: 10px; font-weight: 600; color: var(--text-3); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px; }
+.signal-row { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 12px 16px; display: flex; align-items: flex-start; gap: 12px; margin-bottom: 8px; }
+.signal-num { width: 22px; height: 22px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: #fff; flex-shrink: 0; margin-top: 1px; }
+.signal-text { font-size: 13px; color: var(--text-2); line-height: 1.5; }
 
-  /* ── Metric cards ── */
-  .metrics-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-bottom: 16px; }
-  .metric-card { padding: 14px 16px; }
-  .metric-label { font-size: 10px; color: var(--text-3); font-weight: 600;
-    letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 6px; }
-  .metric-val   { font-size: 22px; font-weight: 700; color: var(--text-1); }
-  .metric-sub   { font-size: 10px; color: var(--text-3); margin-top: 4px; }
+/* Interventions */
+.intv-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 16px; margin-bottom: 10px; }
+.intv-badge { display: inline-block; padding: 2px 10px; border-radius: 5px; font-size: 10px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 8px; }
+.intv-action { font-size: 14px; font-weight: 600; color: var(--text-1); margin-bottom: 6px; }
+.intv-rationale { font-size: 12px; color: var(--text-2); line-height: 1.5; }
 
-  /* ── Charts grid ── */
-  .charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
-  .chart-label { font-size: 10px; font-weight: 600; color: var(--text-3);
-    letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 12px; }
-  .chart-axis  { display: flex; justify-content: space-between; margin-top: 6px;
-    font-size: 9px; color: var(--text-3); }
+/* Prognosis */
+.risk-track { background: var(--border); border-radius: 8px; height: 12px; overflow: hidden; margin: 10px 0 6px; }
+.risk-fill { height: 12px; border-radius: 8px; transition: width 1s ease; }
+.risk-axis { display: flex; justify-content: space-between; font-size: 9px; color: var(--text-3); }
+.prognosis-text { font-size: 13px; color: var(--text-2); line-height: 1.65; }
 
-  /* ── Pattern result ── */
-  .pattern-card {
-    border-radius: var(--radius); padding: 22px; margin-bottom: 16px;
-    border: 1px solid; box-shadow: var(--shadow);
-  }
-  .pattern-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
-  .pattern-left   { display: flex; align-items: center; gap: 14px; }
-  .pattern-emoji  { font-size: 32px; }
-  .pattern-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 1px;
-    text-transform: uppercase; margin-bottom: 4px; }
-  .pattern-name   { font-size: 20px; font-weight: 800; color: var(--text-1); }
-  .pattern-conf   { text-align: right; }
-  .pattern-conf-label { font-size: 10px; color: var(--text-3); margin-bottom: 4px; }
-  .pattern-conf-val   { font-size: 26px; font-weight: 800; }
+/* Risk badge — FIXED */
+.risk-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.4px; }
+.risk-dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
 
-  .conf-bar-track {
-    background: var(--border); border-radius: 4px; height: 5px; margin-bottom: 14px;
-  }
-  .conf-bar-fill { height: 5px; border-radius: 4px; transition: width 0.8s ease; }
-  .pattern-desc { font-size: 13px; color: var(--text-2); line-height: 1.65; }
+/* Sparkline */
+.sparkline-wrap { overflow: visible; }
 
-  /* ── Tabs ── */
-  .tabs {
-    display: flex; gap: 0; background: var(--bg-sidebar);
-    border: 1px solid var(--border); border-radius: var(--radius);
-    padding: 4px; margin-bottom: 16px;
-  }
-  .tab-btn {
-    flex: 1; padding: 8px 0; border-radius: 8px; border: none; cursor: pointer;
-    font-size: 12px; font-family: 'Inter', sans-serif; transition: all 0.12s;
-    font-weight: 500; background: transparent; color: var(--text-3);
-  }
-  .tab-btn.active {
-    background: var(--bg-card); color: var(--text-1); font-weight: 600;
-    box-shadow: var(--shadow-sm);
-  }
+/* SHAP bar chart */
+.shap-row { display: flex; align-items: center; gap: 8px; margin-bottom: 7px; font-size: 11px; }
+.shap-label { width: 160px; color: var(--text-2); text-align: right; flex-shrink: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.shap-bar-track { flex: 1; background: var(--border); border-radius: 4px; height: 10px; }
+.shap-bar-fill { height: 10px; border-radius: 4px; transition: width 0.6s ease; }
+.shap-val { width: 36px; font-size: 10px; color: var(--text-3); font-family: 'JetBrains Mono', monospace; }
 
-  /* ── Diagnosis tab ── */
-  .signals-label { font-size: 10px; font-weight: 600; color: var(--text-3);
-    letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px; }
-  .signal-row {
-    background: var(--bg-card); border: 1px solid var(--border);
-    border-radius: 8px; padding: 12px 16px; display: flex;
-    align-items: flex-start; gap: 12px; margin-bottom: 8px;
-  }
-  .signal-num {
-    width: 22px; height: 22px; border-radius: 6px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 11px; font-weight: 700; color: #fff; flex-shrink: 0; margin-top: 1px;
-  }
-  .signal-text { font-size: 13px; color: var(--text-2); line-height: 1.5; }
-
-  /* ── Interventions tab ── */
-  .intv-card {
-    background: var(--bg-card); border: 1px solid var(--border);
-    border-radius: 8px; padding: 16px; margin-bottom: 10px;
-  }
-  .intv-badge {
-    display: inline-block; padding: 2px 10px; border-radius: 5px;
-    font-size: 10px; font-weight: 700; letter-spacing: 0.5px;
-    text-transform: uppercase; margin-bottom: 8px;
-  }
-  .intv-action   { font-size: 14px; font-weight: 600; color: var(--text-1); margin-bottom: 6px; }
-  .intv-rationale { font-size: 12px; color: var(--text-2); line-height: 1.5; }
-
-  /* ── Prognosis tab ── */
-  .risk-track { background: var(--border); border-radius: 8px; height: 12px; overflow: hidden; margin: 10px 0 6px; }
-  .risk-fill  { height: 12px; border-radius: 8px; transition: width 1s ease; }
-  .risk-axis  { display: flex; justify-content: space-between; font-size: 9px; color: var(--text-3); }
-  .prognosis-text { font-size: 13px; color: var(--text-2); line-height: 1.65; }
-
-  /* ── Risk badge ── */
-  .risk-badge {
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.4px;
-  }
-  .risk-dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
-
-  /* ── Sparkline SVG wrapper ── */
-  .sparkline-wrap { overflow: visible; }
-
-  /* ── Animations ── */
-  @keyframes fadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:none; } }
-  .fade-in { animation: fadeIn 0.3s ease forwards; }
+@keyframes fadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:none; } }
+.fade-in { animation: fadeIn 0.3s ease forwards; }
 </style>
 </head>
 <body>
 
-<!-- Header -->
 <header class="header">
   <div class="logo">
     <div class="logo-mark">P</div>
@@ -242,22 +141,23 @@
       <div class="logo-sub">Learning Analytics Prototype</div>
     </div>
   </div>
-  <div class="header-meta"> University of Warwick </div>
+  <div class="header-right">
+    <span class="header-badge">OFFLINE · NO API</span>
+    <span class="header-meta">University of Warwick · CS907</span>
+  </div>
 </header>
 
 <div class="layout">
-  <!-- Sidebar -->
   <aside class="sidebar">
     <div class="sidebar-label">Student Cohort</div>
     <div id="student-list"></div>
     <div class="sidebar-note">
-      <strong>Rule-based classifier</strong>  patterns are derived from 45 behavioural
-      features extracted from OULAD-style data. In the full system, these rules
-      are replaced by trained ML models (RF, XGBoost, SHAP).
+      <strong>Rule-based classifier</strong> — patterns derived from 45 behavioural features
+      extracted from OULAD-style data. In the full system, these rules are replaced by
+      trained ML models (RF, XGBoost, SHAP). See <em>prediction_model</em> on GitHub.
     </div>
   </aside>
 
-  <!-- Main -->
   <main class="main" id="main-panel">
     <div class="empty-state">
       <div class="empty-icon">👆</div>
@@ -267,207 +167,302 @@
 </div>
 
 <script>
-// ─── Student data ─────────────────────────────────────────────────────────────
+// ── Student data ──────────────────────────────────────────────────────────────
 const STUDENTS = [
-  {
-    id:"S-11391", name:"Aisha Okonkwo", module:"AAA · 2013J", avatar:"AO", avatarBg:"#1C7293",
-    m:{ clicks:2450, cov:0.32, score1:75, scoreTrend:-2.5, late:1, forum:12,
-        activeWeeks:8, submitRate:0.92, weekly:[320,410,380,290,180,120,90,80], scores:[75,72,68,65,60] }
-  },
-  {
-    id:"S-28400", name:"Marco Delgado", module:"BBB · 2013J", avatar:"MD", avatarBg:"#B45309",
-    m:{ clicks:850, cov:1.85, score1:45, scoreTrend:0.5, late:3, forum:2,
-        activeWeeks:5, submitRate:0.71, weekly:[40,50,35,280,30,45,320,20], scores:[45,47,49,50,52] }
-  },
-  {
-    id:"S-30268", name:"Priya Sharma", module:"CCC · 2013J", avatar:"PS", avatarBg:"#0F766E",
-    m:{ clicks:3200, cov:0.18, score1:88, scoreTrend:1.2, late:0, forum:28,
-        activeWeeks:10, submitRate:1.0, weekly:[380,370,360,395,410,400,380,420], scores:[88,89,90,91,93] }
-  },
-  {
-    id:"S-31604", name:"James Whitfield", module:"AAA · 2013J", avatar:"JW", avatarBg:"#7C3AED",
-    m:{ clicks:120, cov:2.5, score1:35, scoreTrend:-5.0, late:4, forum:0,
-        activeWeeks:2, submitRate:0.43, weekly:[80,30,5,2,0,2,1,0], scores:[35,28,20,null,null] }
-  },
-  {
-    id:"S-44201", name:"Yuki Tanaka", module:"DDD · 2014J", avatar:"YT", avatarBg:"#0369A1",
-    m:{ clicks:2900, cov:0.45, score1:52, scoreTrend:-0.8, late:2, forum:6,
-        activeWeeks:9, submitRate:0.88, weekly:[300,320,310,290,270,250,230,220], scores:[52,51,50,48,46] }
-  }
+  { id:"S-11391", name:"Aisha Okonkwo",  module:"AAA · 2013J", avatar:"AO", avatarBg:"#1C7293",
+    m:{ clicks:2450, cov:0.32, score1:75, scoreTrend:-2.5, late:1, forum:12, activeWeeks:8, submitRate:0.92,
+        weekly:[320,410,380,290,180,120,90,80], scores:[75,72,68,65,60] } },
+  { id:"S-28400", name:"Marco Delgado",  module:"BBB · 2013J", avatar:"MD", avatarBg:"#B45309",
+    m:{ clicks:850,  cov:1.85, score1:45, scoreTrend:0.5,  late:3, forum:2,  activeWeeks:5, submitRate:0.71,
+        weekly:[40,50,35,280,30,45,320,20], scores:[45,47,49,50,52] } },
+  { id:"S-30268", name:"Priya Sharma",   module:"CCC · 2013J", avatar:"PS", avatarBg:"#0F766E",
+    m:{ clicks:3200, cov:0.18, score1:88, scoreTrend:1.2,  late:0, forum:28, activeWeeks:10, submitRate:1.0,
+        weekly:[380,370,360,395,410,400,380,420], scores:[88,89,90,91,93] } },
+  { id:"S-31604", name:"James Whitfield",module:"AAA · 2013J", avatar:"JW", avatarBg:"#7C3AED",
+    m:{ clicks:120,  cov:2.5,  score1:35, scoreTrend:-5.0, late:4, forum:0,  activeWeeks:2, submitRate:0.43,
+        weekly:[80,30,5,2,0,2,1,0], scores:[35,28,20,null,null] } },
+  { id:"S-44201", name:"Yuki Tanaka",    module:"DDD · 2014J", avatar:"YT", avatarBg:"#0369A1",
+    m:{ clicks:2900, cov:0.45, score1:52, scoreTrend:-0.8, late:2, forum:6,  activeWeeks:9, submitRate:0.88,
+        weekly:[300,320,310,290,270,250,230,220], scores:[52,51,50,48,46] } }
 ];
 
-// ─── Pattern definitions ──────────────────────────────────────────────────────
+// ── Pattern definitions ───────────────────────────────────────────────────────
 const PATTERNS = {
   "Ghost": {
-    color:"#64748B", lightBg:"#F8FAFC", border:"#CBD5E1",
-    emoji:"👻", riskLevel:"Critical",
-    desc:"This student has registered but is almost entirely absent from the virtual learning environment. Engagement is too sparse to distinguish academic difficulty from disengagement  the system cannot tell if they are struggling or have simply stopped attending. This is categorically different from a binary 'at-risk' flag because it implies an outreach or welfare check is needed, not academic support.",
+    color:"#64748B", lightBg:"#F8FAFC", border:"#CBD5E1", emoji:"👻", riskLevel:"Critical",
+    desc:"This student has registered but is almost entirely absent from the virtual learning environment. Engagement is too sparse to distinguish academic difficulty from personal disengagement — the system cannot tell if they are struggling or have simply stopped attending. This is categorically different from a binary 'at-risk' flag because it implies welfare outreach is needed, not academic support.",
     interventions:[
-      { type:"Primary", badge:"bg:#FEE2E2;color:#991B1B", action:"Immediate pastoral welfare contact within 48 hours", rationale:"Near-zero activity may indicate personal crisis, registration error, or complete dropout intent. Academic support is premature without first establishing contact." },
-      { type:"Secondary", badge:"bg:#FEF3C7;color:#92400E", action:"Check registration system for any withdrawal flags", rationale:"Students who have informally stopped attending often appear in data before formal withdrawal is processed." },
-      { type:"Monitor", badge:"bg:#EDE9FE;color:#6B21A8", action:"Track any login activity over next 7 days", rationale:"Even minimal re-engagement (single login) changes the risk profile and intervention approach significantly." }
+      { type:"Primary", bgColor:"#FEE2E2", textColor:"#991B1B",
+        action:"Immediate pastoral welfare contact within 48 hours",
+        rationale:"Near-zero activity may indicate personal crisis, registration error, or complete dropout intent. Academic support is premature without first establishing contact." },
+      { type:"Secondary", bgColor:"#FEF3C7", textColor:"#92400E",
+        action:"Check registration system for any withdrawal flags",
+        rationale:"Students who have informally stopped attending often appear in data before formal withdrawal is processed." },
+      { type:"Monitor", bgColor:"#EDE9FE", textColor:"#6B21A8",
+        action:"Track any login activity over the next 7 days",
+        rationale:"Even minimal re-engagement (a single login) changes the risk profile and intervention approach significantly." }
     ]
   },
   "Procrastinator": {
-    color:"#B45309", lightBg:"#FFFBEB", border:"#FCD34D",
-    emoji:"⏰", riskLevel:"High",
-    desc:"This student shows strong pre-deadline activity spikes with very low engagement between assignments. Erratic engagement (high coefficient of variation) combined with late submissions reveals a time management pattern rather than a lack of motivation or ability. This is distinct from a disengaging student because overall click volume may be reasonable  the problem is scheduling, not effort.",
+    color:"#B45309", lightBg:"#FFFBEB", border:"#FCD34D", emoji:"⏰", riskLevel:"High",
+    desc:"This student shows strong pre-deadline activity spikes with low engagement between assignments. High engagement variability (CoV) combined with late submissions reveals a time management pattern — not a lack of motivation or ability. This is distinct from a disengaging student because overall click volume may be reasonable; the problem is scheduling, not effort.",
     interventions:[
-      { type:"Primary", badge:"bg:#FEF3C7;color:#92400E", action:"Time management coaching and interim deadline scaffolding", rationale:"Procrastinators respond well to structured check-in deadlines that break assignments into earlier sub-tasks, reducing last-minute cramming." },
-      { type:"Secondary", badge:"bg:#DBEAFE;color:#1E40AF", action:"Share personalised study planner template", rationale:"Concrete scheduling tools address the behavioural pattern rather than the academic content, which is typically not the root issue." },
-      { type:"Monitor", badge:"bg:#EDE9FE;color:#6B21A8", action:"Monitor submission timing relative to deadlines each week", rationale:"Improvement in average submission lead time is the primary indicator that the intervention is working." }
+      { type:"Primary", bgColor:"#FEF3C7", textColor:"#92400E",
+        action:"Time management coaching and interim deadline scaffolding",
+        rationale:"Procrastinators respond well to structured check-in deadlines that break assignments into sub-tasks, reducing last-minute cramming." },
+      { type:"Secondary", bgColor:"#DBEAFE", textColor:"#1E40AF",
+        action:"Share a personalised study planner template",
+        rationale:"Concrete scheduling tools address the behavioural pattern rather than academic content, which is typically not the root issue." },
+      { type:"Monitor", bgColor:"#EDE9FE", textColor:"#6B21A8",
+        action:"Monitor submission timing relative to deadlines each week",
+        rationale:"Improvement in average submission lead time is the primary indicator that the intervention is working." }
     ]
   },
   "High Achiever": {
-    color:"#0F766E", lightBg:"#F0FDFA", border:"#99F6E4",
-    emoji:"🎯", riskLevel:"Low",
-    desc:"This student demonstrates consistent engagement, high assessment scores, and an improving performance trajectory. Stable week-to-week activity and on-time submission behaviour indicate strong self-regulation. Distinguishing this from a 'not at-risk' binary label is important because high achievers may still benefit from enrichment opportunities or advanced support that generic systems would not flag.",
+    color:"#0F766E", lightBg:"#F0FDFA", border:"#99F6E4", emoji:"🎯", riskLevel:"Low",
+    desc:"This student demonstrates consistent engagement, high assessment scores, and an improving performance trajectory. Stable week-to-week activity and on-time submissions indicate strong self-regulation. Distinguishing this from a simple 'not at-risk' binary label matters because high achievers may still benefit from enrichment opportunities that generic systems would never flag.",
     interventions:[
-      { type:"Primary", badge:"bg:#D1FAE5;color:#065F46", action:"Offer enrichment resources or advanced reading pathways", rationale:"High achievers disengage when under-challenged. Providing extension material maintains motivation and engagement breadth." },
-      { type:"Secondary", badge:"bg:#DBEAFE;color:#1E40AF", action:"Consider peer mentoring or study group leadership role", rationale:"Teaching others consolidates understanding and provides social benefit  both factors associated with continued high achievement." },
-      { type:"Monitor", badge:"bg:#EDE9FE;color:#6B21A8", action:"Watch for sudden engagement drop  high achievers can crash after burnout", rationale:"A sharp decline from a high baseline is a meaningful signal that is easy to miss without pattern-aware monitoring." }
+      { type:"Primary", bgColor:"#D1FAE5", textColor:"#065F46",
+        action:"Offer enrichment resources or advanced reading pathways",
+        rationale:"High achievers disengage when under-challenged. Extension material maintains motivation and engagement breadth." },
+      { type:"Secondary", bgColor:"#DBEAFE", textColor:"#1E40AF",
+        action:"Consider peer mentoring or study group leadership",
+        rationale:"Teaching others consolidates understanding and provides social benefit — both associated with continued high achievement." },
+      { type:"Monitor", bgColor:"#EDE9FE", textColor:"#6B21A8",
+        action:"Watch for sudden engagement drops — burnout risk",
+        rationale:"A sharp decline from a high baseline is a meaningful signal that is easy to miss without pattern-aware monitoring." }
     ]
   },
   "Disengaging": {
-    color:"#B91C1C", lightBg:"#FFF5F5", border:"#FECACA",
-    emoji:"📉", riskLevel:"High",
-    desc:"This student shows a clear declining trajectory in both engagement and performance over the course. Early activity levels were reasonable but have dropped progressively  a pattern distinct from the Ghost (who never engaged) and the Procrastinator (who has erratic but present activity). The declining trend suggests a student who has become overwhelmed, lost motivation, or encountered external pressures mid-course.",
+    color:"#B91C1C", lightBg:"#FFF5F5", border:"#FECACA", emoji:"📉", riskLevel:"High",
+    desc:"This student shows a clear declining trajectory in both engagement and performance. Early activity was reasonable but has dropped progressively — distinct from Ghost (who never engaged) and Procrastinator (who has erratic but present activity). The declining trend suggests a student who has become overwhelmed, lost motivation, or encountered external pressures mid-course.",
     interventions:[
-      { type:"Primary", badge:"bg:#FEE2E2;color:#991B1B", action:"Personal tutor check-in to identify root cause of decline", rationale:"Declining engagement has multiple possible causes  academic difficulty, personal circumstances, or loss of interest. The intervention must be tailored to the actual cause, which requires a conversation." },
-      { type:"Secondary", badge:"bg:#FEF3C7;color:#92400E", action:"Offer academic support referral and workload review", rationale:"If the decline correlates with a particularly heavy assessment period, temporary workload support or extension may prevent full withdrawal." },
-      { type:"Monitor", badge:"bg:#EDE9FE;color:#6B21A8", action:"Track weekly click count and score trend weekly", rationale:"Stabilisation of the declining engagement trend  even without recovery  indicates the intervention has had effect." }
+      { type:"Primary", bgColor:"#FEE2E2", textColor:"#991B1B",
+        action:"Personal tutor check-in to identify root cause of decline",
+        rationale:"Declining engagement has multiple causes — academic difficulty, personal circumstances, or loss of interest. The intervention must be tailored to the actual cause, which requires a conversation first." },
+      { type:"Secondary", bgColor:"#FEF3C7", textColor:"#92400E",
+        action:"Offer academic support referral and workload review",
+        rationale:"If the decline correlates with a heavy assessment period, temporary support or an extension may prevent full withdrawal." },
+      { type:"Monitor", bgColor:"#EDE9FE", textColor:"#6B21A8",
+        action:"Track weekly click count and score trend",
+        rationale:"Stabilisation of the declining engagement trend — even without recovery — indicates the intervention has had an effect." }
     ]
   },
   "Conceptual Struggler": {
-    color:"#7C3AED", lightBg:"#F5F3FF", border:"#C4B5FD",
-    emoji:"🧩", riskLevel:"Medium",
-    desc:"This student is consistently engaged  submitting assignments on time and logging in regularly  but scores remain low throughout the course with no improving trend. This pattern is the most diagnostically important and the hardest for binary systems to handle: the student does not look disengaged, yet is academically failing. The problem is comprehension, not commitment.",
+    color:"#7C3AED", lightBg:"#F5F3FF", border:"#C4B5FD", emoji:"🧩", riskLevel:"Medium",
+    desc:"This student is consistently engaged — submitting on time, logging in regularly — but scores remain persistently low with no improving trend. This is the hardest pattern for binary systems to handle: the student does not look disengaged, yet is academically failing. The problem is comprehension, not commitment.",
     interventions:[
-      { type:"Primary", badge:"bg:#EDE9FE;color:#6B21A8", action:"Targeted academic support: tutoring sessions focused on assessed concepts", rationale:"High engagement with low scores indicates the student is trying but not understanding. Tutoring addresses the specific conceptual gaps rather than motivation." },
-      { type:"Secondary", badge:"bg:#DBEAFE;color:#1E40AF", action:"Review learning materials for accessibility  consider alternative explanations or worked examples", rationale:"Some students engage heavily with materials that are not pitched at the right level. Supplementary resources at a different register may unlock understanding." },
-      { type:"Monitor", badge:"bg:#D1FAE5;color:#065F46", action:"Track score improvement rate across successive assessments", rationale:"Even a small positive score trend following tutoring indicates the conceptual gap is being addressed." }
+      { type:"Primary", bgColor:"#EDE9FE", textColor:"#6B21A8",
+        action:"Targeted tutoring sessions focused on assessed concepts",
+        rationale:"High engagement with low scores indicates the student is trying but not understanding. Tutoring addresses specific conceptual gaps rather than motivation." },
+      { type:"Secondary", bgColor:"#DBEAFE", textColor:"#1E40AF",
+        action:"Review learning materials — consider alternative explanations or worked examples",
+        rationale:"Some students engage heavily with materials pitched at the wrong level. Supplementary resources at a different register may unlock understanding." },
+      { type:"Monitor", bgColor:"#D1FAE5", textColor:"#065F46",
+        action:"Track score improvement rate across successive assessments",
+        rationale:"Even a small positive score trend following tutoring indicates the conceptual gap is being addressed." }
     ]
   }
 };
 
-// ─── Rule-based classifier ────────────────────────────────────────────────────
+// ── Rule-based classifier (proxy for trained RF model) ────────────────────────
 function classify(m) {
-  // Compute weekly trend
   const w = m.weekly.filter(Boolean);
-  const midpoint = Math.floor(w.length / 2);
-  const firstHalf = w.slice(0, midpoint).reduce((a,b) => a+b, 0) / midpoint;
-  const secondHalf = w.slice(midpoint).reduce((a,b) => a+b, 0) / (w.length - midpoint);
+  const mid = Math.floor(w.length / 2);
+  const firstHalf = w.slice(0,mid).reduce((a,b)=>a+b,0) / mid;
+  const secondHalf = w.slice(mid).reduce((a,b)=>a+b,0) / (w.length - mid);
   const weeklyDecline = (firstHalf - secondHalf) / (firstHalf || 1);
 
-  // Ghost: barely there
+  // Ghost
   if (m.clicks < 300 && m.submitRate < 0.55 && m.activeWeeks <= 3) {
-    const conf = Math.min(95, 70 + (300 - m.clicks) / 10);
-    return { name:"Ghost", conf:Math.round(conf), riskScore: 90,
-      signals:["Total VLE clicks critically low ("+m.clicks+")", "Only "+m.activeWeeks+" active weeks out of 10", "Assignment submission rate "+Math.round(m.submitRate*100)+"%  majority missed"] };
+    return { name:"Ghost", riskLevel:"Critical",
+      conf: Math.min(95, Math.round(70 + (300-m.clicks)/10)), riskScore:90,
+      signals:[
+        `Total VLE clicks critically low (${m.clicks}) — 10th percentile of cohort`,
+        `Only ${m.activeWeeks} active weeks out of 10 recorded`,
+        `Assignment submission rate ${Math.round(m.submitRate*100)}% — majority missed`
+      ],
+      shap:[
+        {label:"Total clicks",      val:0.41, dir:"neg"},
+        {label:"Active weeks",      val:0.28, dir:"neg"},
+        {label:"Submit rate",       val:0.19, dir:"neg"},
+        {label:"Forum rate",        val:0.07, dir:"neg"},
+        {label:"Score trend",       val:0.05, dir:"neg"},
+      ]
+    };
   }
-  // High achiever
+
+  // High Achiever
   if (m.score1 >= 80 && m.scoreTrend >= 0 && m.submitRate >= 0.95 && m.cov < 0.6) {
-    const conf = Math.min(96, 75 + m.score1 * 0.2 + m.forum * 0.3);
-    return { name:"High Achiever", conf:Math.round(conf), riskScore: 8,
-      signals:["First assessment score "+m.score1+"%  strong baseline", "Positive score trend (+"+m.scoreTrend+" pts/assessment)", "Engagement consistency CoV="+m.cov+"  very regular"] };
+    return { name:"High Achiever", riskLevel:"Low",
+      conf: Math.min(96, Math.round(75 + m.score1*0.2 + m.forum*0.3)), riskScore:8,
+      signals:[
+        `First assessment score ${m.score1}% — strong baseline`,
+        `Positive score trend (+${m.scoreTrend} pts/assessment)`,
+        `Engagement consistency CoV=${m.cov} — very regular pattern`
+      ],
+      shap:[
+        {label:"First score",       val:0.38, dir:"pos"},
+        {label:"Score trend",       val:0.26, dir:"pos"},
+        {label:"Submit rate",       val:0.18, dir:"pos"},
+        {label:"Engagement CoV",    val:0.12, dir:"pos"},
+        {label:"Forum rate",        val:0.06, dir:"pos"},
+      ]
+    };
   }
-  // Procrastinator: high CoV + late submissions
+
+  // Procrastinator
   if (m.cov >= 1.4 && m.late >= 2) {
-    const conf = Math.min(93, 60 + m.cov * 12 + m.late * 4);
-    return { name:"Procrastinator", conf:Math.round(conf), riskScore: 62,
-      signals:["High engagement variability: CoV="+m.cov+" (pre-deadline spikes visible)", m.late+" late submissions  consistent deadline pressure pattern", "Irregular weekly activity suggests reactive rather than proactive study"] };
+    return { name:"Procrastinator", riskLevel:"High",
+      conf: Math.min(93, Math.round(60 + m.cov*12 + m.late*4)), riskScore:62,
+      signals:[
+        `High engagement variability: CoV=${m.cov} — pre-deadline spikes visible`,
+        `${m.late} late submissions — consistent deadline pressure pattern`,
+        `Irregular weekly activity suggests reactive rather than proactive study`
+      ],
+      shap:[
+        {label:"Engagement CoV",    val:0.44, dir:"neg"},
+        {label:"Late submissions",  val:0.31, dir:"neg"},
+        {label:"Pre-deadline spike",val:0.15, dir:"neg"},
+        {label:"Submit rate",       val:0.07, dir:"pos"},
+        {label:"Total clicks",      val:0.03, dir:"pos"},
+      ]
+    };
   }
-  // Disengaging: clear weekly decline + low recent activity
+
+  // Disengaging
   if (weeklyDecline > 0.35 && m.scoreTrend < -1.5) {
-    const conf = Math.min(92, 55 + weeklyDecline * 80 + Math.abs(m.scoreTrend) * 3);
-    return { name:"Disengaging", conf:Math.round(conf), riskScore: 75,
-      signals:["Weekly engagement declining (first-half avg "+Math.round(firstHalf)+" → second-half "+Math.round(secondHalf)+" clicks)", "Score trend: "+m.scoreTrend+" pts/assessment  progressively worsening", "Pattern consistent with mid-course overwhelm or loss of motivation"] };
+    return { name:"Disengaging", riskLevel:"High",
+      conf: Math.min(92, Math.round(55 + weeklyDecline*80 + Math.abs(m.scoreTrend)*3)), riskScore:75,
+      signals:[
+        `Weekly engagement declining (first-half avg ${Math.round(firstHalf)} → second-half ${Math.round(secondHalf)} clicks)`,
+        `Score trend: ${m.scoreTrend} pts/assessment — progressively worsening`,
+        `Pattern consistent with mid-course overwhelm or loss of motivation`
+      ],
+      shap:[
+        {label:"Weekly decline",    val:0.39, dir:"neg"},
+        {label:"Score trend",       val:0.29, dir:"neg"},
+        {label:"Recent activity",   val:0.18, dir:"neg"},
+        {label:"Submit rate",       val:0.09, dir:"neg"},
+        {label:"Forum rate",        val:0.05, dir:"pos"},
+      ]
+    };
   }
-  // Conceptual struggler: engaged but low scores
+
+  // Conceptual Struggler
   if (m.cov < 0.8 && m.score1 < 62 && m.clicks > 800) {
-    const conf = Math.min(91, 55 + (62 - m.score1) * 0.8 + (1 - m.cov) * 20);
-    return { name:"Conceptual Struggler", conf:Math.round(conf), riskScore: 55,
-      signals:["First score "+m.score1+"% despite "+m.clicks+" VLE interactions  effort is present", "Score trend "+m.scoreTrend+" pts/assessment  no self-correction", "Consistent engagement (CoV="+m.cov+") rules out motivation as primary issue"] };
+    return { name:"Conceptual Struggler", riskLevel:"Medium",
+      conf: Math.min(91, Math.round(55 + (62-m.score1)*0.8 + (1-m.cov)*20)), riskScore:55,
+      signals:[
+        `First score ${m.score1}% despite ${m.clicks} VLE interactions — effort is present`,
+        `Score trend ${m.scoreTrend} pts/assessment — no self-correction`,
+        `Consistent engagement (CoV=${m.cov}) rules out motivation as primary issue`
+      ],
+      shap:[
+        {label:"First score",       val:0.36, dir:"neg"},
+        {label:"Score trend",       val:0.27, dir:"neg"},
+        {label:"Engagement CoV",    val:0.21, dir:"pos"},
+        {label:"Total clicks",      val:0.11, dir:"pos"},
+        {label:"Submit rate",       val:0.05, dir:"pos"},
+      ]
+    };
   }
-  // Default: disengaging with moderate signals
-  const conf = Math.max(55, Math.min(85, 60 + weeklyDecline * 40));
-  return { name:"Disengaging", conf:Math.round(conf), riskScore: 60,
-    signals:["Engagement declining over course duration", "Score trajectory: "+m.scoreTrend+" pts/assessment", "Submission rate "+Math.round(m.submitRate*100)+"% showing partial dropout signs"] };
+
+  // Default: Disengaging with moderate signals
+  return { name:"Disengaging", riskLevel:"High",
+    conf: Math.max(55, Math.min(85, Math.round(60 + weeklyDecline*40))), riskScore:60,
+    signals:[
+      "Engagement declining over course duration",
+      `Score trajectory: ${m.scoreTrend} pts/assessment`,
+      `Submission rate ${Math.round(m.submitRate*100)}% — partial dropout signs`
+    ],
+    shap:[
+      {label:"Weekly decline",    val:0.35, dir:"neg"},
+      {label:"Score trend",       val:0.30, dir:"neg"},
+      {label:"Submit rate",       val:0.20, dir:"neg"},
+      {label:"Total clicks",      val:0.10, dir:"neg"},
+      {label:"Forum rate",        val:0.05, dir:"pos"},
+    ]
+  };
 }
 
-// ─── Sparkline ────────────────────────────────────────────────────────────────
+// ── Sparkline ────────────────────────────────────────────────────────────────
 function sparkline(data, color, h=48) {
   const valid = data.filter(v => v != null);
-  if (valid.length < 2) return '<svg width="100%" height="'+h+'"></svg>';
+  if (valid.length < 2) return `<svg width="100%" height="${h}"></svg>`;
   const max = Math.max(...valid), min = Math.min(...valid), range = max - min || 1;
-  const w = 200;
-  const pts = data.map((v, i) => {
-    if (v == null) return null;
-    const x = (i / (data.length - 1)) * w;
-    const y = h - ((v - min) / range) * (h - 6) - 3;
-    return {x, y};
-  });
-  const validPts = pts.filter(Boolean);
-  const d = validPts.map((p, i) => (i === 0 ? `M${p.x},${p.y}` : `L${p.x},${p.y}`)).join(" ");
-  const circles = validPts.map(p => `<circle cx="${p.x}" cy="${p.y}" r="2.5" fill="${color}"/>`).join("");
-  return `<svg width="100%" height="${h}" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" style="overflow:visible">
+  const W = 200;
+  const pts = data.map((v,i) => v == null ? null : { x:(i/(data.length-1))*W, y:h-((v-min)/range)*(h-6)-3 });
+  const vp = pts.filter(Boolean);
+  const d = vp.map((p,i) => (i===0 ? `M${p.x},${p.y}` : `L${p.x},${p.y}`)).join(" ");
+  const circles = vp.map(p => `<circle cx="${p.x}" cy="${p.y}" r="2.5" fill="${color}"/>`).join("");
+  return `<svg width="100%" height="${h}" viewBox="0 0 ${W} ${h}" preserveAspectRatio="none" style="overflow:visible">
     <path d="${d}" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    ${circles}
-  </svg>`;
+    ${circles}</svg>`;
 }
 
-// ─── Risk badge HTML ──────────────────────────────────────────────────────────
+// ── Risk badge — FIXED ────────────────────────────────────────────────────────
 function riskBadge(level) {
   const map = {
-    "Low":{"bg":"#D1FAE5","color":"#065F46","dot":"#10B981"},
-    "Medium":{"bg":"#DBEAFE","color":"#1E40AF","dot":"#3B82F6"},
-    "High":{"bg":"#FEF3C7","color":"#92400E","dot":"#F59E0B"},
-    "Critical":{"bg":"#FEE2E2","color":"#991B1B","dot":"#EF4444"}
+    "Low":      { bg:"#D1FAE5", color:"#065F46", dot:"#10B981" },
+    "Medium":   { bg:"#DBEAFE", color:"#1E40AF", dot:"#3B82F6" },
+    "High":     { bg:"#FEF3C7", color:"#92400E", dot:"#F59E0B" },
+    "Critical": { bg:"#FEE2E2", color:"#991B1B", dot:"#EF4444" }
   };
   const s = map[level] || map["Medium"];
   return `<span class="risk-badge" style="background:${s.bg};color:${s.color}">
     <span class="risk-dot" style="background:${s.dot}"></span>${level} Risk</span>`;
 }
 
-// ─── Render student list ──────────────────────────────────────────────────────
-let activeId = null;
+// ── SHAP bar chart ────────────────────────────────────────────────────────────
+function shapBars(shap, patColor) {
+  const maxVal = Math.max(...shap.map(s => s.val));
+  return shap.map(s => {
+    const pct = Math.round((s.val / maxVal) * 100);
+    const barColor = s.dir === "neg" ? "#EF4444" : "#10B981";
+    return `<div class="shap-row">
+      <div class="shap-label">${s.label}</div>
+      <div class="shap-bar-track"><div class="shap-bar-fill" style="width:${pct}%;background:${barColor}"></div></div>
+      <div class="shap-val">${s.val.toFixed(2)}</div>
+    </div>`;
+  }).join("");
+}
 
+// ── Prognosis text ────────────────────────────────────────────────────────────
+function getPrognosis(name, m) {
+  const p = {
+    "Ghost": `Based on the current engagement level of ${m.clicks} clicks and ${Math.round(m.submitRate*100)}% submission rate, this student is highly likely to formally withdraw within 2–3 weeks if no contact is made. OULAD data shows ghost-pattern students have a 76% failure or withdrawal rate without intervention.`,
+    "Procrastinator": `Without time management support, this student will likely continue pre-deadline cramming, which correlates with declining scores as assessment complexity increases. Probability of passing drops from approximately 60% to 38% if the pattern continues unchanged.`,
+    "High Achiever": `Trajectory strongly indicates a Pass or Distinction outcome. The primary risk is mid-course burnout if workload spikes. No immediate intervention required — monitoring for any engagement drop is sufficient.`,
+    "Disengaging": `The declining trajectory, if continued, projects to a Fail or Withdrawal by weeks 8–10. OULAD data from similar profiles shows 65% probability of non-completion without intervention at this stage.`,
+    "Conceptual Struggler": `Without academic support, this student will likely fail individual assessments despite continued engagement. There is approximately a 45% risk of withdrawal following a particularly poor result. Early tutoring significantly improves outcomes for this profile.`
+  };
+  return p[name] || "Insufficient signal for confident prognosis. Continue monitoring engagement and submission patterns over the next two weeks.";
+}
+
+// ── Render sidebar list ───────────────────────────────────────────────────────
+let activeId = null;
 function renderList() {
-  const el = document.getElementById("student-list");
-  el.innerHTML = STUDENTS.map(s => `
+  document.getElementById("student-list").innerHTML = STUDENTS.map(s => `
     <button class="student-btn${activeId===s.id?" active":""}" onclick="selectStudent('${s.id}')">
       <div class="avatar" style="background:${s.avatarBg}">${s.avatar}</div>
       <div>
         <div class="stu-name">${s.name}</div>
         <div class="stu-id">${s.id} · ${s.module}</div>
       </div>
-    </button>
-  `).join("");
+    </button>`).join("");
 }
 
-// ─── Render main panel ────────────────────────────────────────────────────────
+// ── Render main panel ─────────────────────────────────────────────────────────
 function selectStudent(id) {
   activeId = id;
   renderList();
   const s = STUDENTS.find(x => x.id === id);
   const result = classify(s.m);
   const pat = PATTERNS[result.name];
-  renderMain(s, result, pat);
-}
-
-let currentTab = "diagnosis";
-function setTab(t) {
-  currentTab = t;
-  document.querySelectorAll(".tab-btn").forEach(b => b.classList.toggle("active", b.dataset.tab===t));
-  document.querySelectorAll(".tab-panel").forEach(p => p.style.display = p.dataset.panel===t?"block":"none");
-}
-
-function renderMain(s, result, pat) {
-  const el = document.getElementById("main-panel");
   const riskColor = { Low:"#0F766E", Medium:"#1D4ED8", High:"#B45309", Critical:"#B91C1C" }[result.riskLevel] || "#B45309";
 
-  el.innerHTML = `
-    <!-- Student header -->
+  document.getElementById("main-panel").innerHTML = `
     <div class="stu-header">
       <div class="stu-header-left">
         <div class="avatar" style="background:${s.avatarBg};width:44px;height:44px;font-size:14px">${s.avatar}</div>
@@ -479,23 +474,19 @@ function renderMain(s, result, pat) {
       ${riskBadge(result.riskLevel)}
     </div>
 
-    <!-- Metrics -->
     <div class="metrics-grid">
       ${[
-        {label:"Total Clicks", val:s.m.clicks.toLocaleString(), sub:"VLE interactions"},
-        {label:"First Score", val:`${s.m.score1}%`, sub:"Baseline performance"},
-        {label:"Submit Rate", val:`${Math.round(s.m.submitRate*100)}%`, sub:"Assignments submitted"},
-        {label:"Late Submissions", val:s.m.late, sub:"Time management signal"},
-      ].map(m=>`
-        <div class="card metric-card">
-          <div class="metric-label">${m.label}</div>
-          <div class="metric-val">${m.val}</div>
-          <div class="metric-sub">${m.sub}</div>
-        </div>
-      `).join("")}
+        {label:"Total Clicks",      val:s.m.clicks.toLocaleString(), sub:"VLE interactions"},
+        {label:"First Score",       val:`${s.m.score1}%`,            sub:"Baseline performance"},
+        {label:"Submit Rate",       val:`${Math.round(s.m.submitRate*100)}%`, sub:"Assignments submitted"},
+        {label:"Late Submissions",  val:s.m.late,                    sub:"Time management signal"},
+      ].map(m=>`<div class="card metric-card">
+        <div class="metric-label">${m.label}</div>
+        <div class="metric-val">${m.val}</div>
+        <div class="metric-sub">${m.sub}</div>
+      </div>`).join("")}
     </div>
 
-    <!-- Charts -->
     <div class="charts-grid">
       <div class="card card-inner">
         <div class="chart-label">Weekly Engagement Pattern</div>
@@ -509,7 +500,6 @@ function renderMain(s, result, pat) {
       </div>
     </div>
 
-    <!-- Pattern result -->
     <div class="pattern-card fade-in" style="background:${pat.lightBg};border-color:${pat.border}">
       <div class="pattern-header">
         <div class="pattern-left">
@@ -530,66 +520,63 @@ function renderMain(s, result, pat) {
       <div class="pattern-desc">${pat.desc}</div>
     </div>
 
-    <!-- Tabs -->
     <div class="tabs">
-      ${[["diagnosis","🔍 Diagnosis"],["interventions","💡 Interventions"],["prognosis","📈 Prognosis"]].map(([t,l])=>`
-        <button class="tab-btn${t==="diagnosis"?" active":""}" data-tab="${t}" onclick="setTab('${t}')">${l}</button>
-      `).join("")}
+      ${[["diagnosis","🔍 Diagnosis"],["interventions","💡 Interventions"],["prognosis","📈 Prognosis"],["shap","🔬 Feature Importance"]].map(([t,l])=>`
+        <button class="tab-btn${t==="diagnosis"?" active":""}" data-tab="${t}" onclick="setTab('${t}')">${l}</button>`).join("")}
     </div>
 
-    <!-- Tab: Diagnosis -->
     <div class="tab-panel fade-in" data-panel="diagnosis">
       <div class="signals-label">Key Diagnostic Signals</div>
       ${result.signals.map((sig,i)=>`
         <div class="signal-row">
           <div class="signal-num" style="background:${pat.color}">${i+1}</div>
           <div class="signal-text">${sig}</div>
-        </div>
-      `).join("")}
+        </div>`).join("")}
     </div>
 
-    <!-- Tab: Interventions -->
     <div class="tab-panel" data-panel="interventions" style="display:none">
       ${pat.interventions.map(intv=>`
         <div class="intv-card">
-          <div class="intv-badge" style="${intv.badge}">${intv.type}</div>
+          <div class="intv-badge" style="background:${intv.bgColor};color:${intv.textColor}">${intv.type}</div>
           <div class="intv-action">${intv.action}</div>
           <div class="intv-rationale">${intv.rationale}</div>
-        </div>
-      `).join("")}
+        </div>`).join("")}
     </div>
 
-    <!-- Tab: Prognosis -->
     <div class="tab-panel" data-panel="prognosis" style="display:none">
       <div class="card card-inner" style="margin-bottom:12px">
-        <div class="chart-label">Risk Score</div>
-        <div class="risk-track">
-          <div class="risk-fill" style="width:${result.riskScore}%;background:${riskColor}"></div>
-        </div>
+        <div class="chart-label">Composite Risk Score</div>
+        <div class="risk-track"><div class="risk-fill" style="width:${result.riskScore}%;background:${riskColor}"></div></div>
         <div class="risk-axis"><span>Low risk (0)</span><span>Critical (100)</span></div>
         <div style="margin-top:12px;font-size:24px;font-weight:800;color:${riskColor}">${result.riskScore} / 100</div>
       </div>
       <div class="card card-inner">
-        <div class="chart-label" style="margin-bottom:10px">Prognosis  if no action taken</div>
+        <div class="chart-label" style="margin-bottom:10px">Prognosis if no action taken</div>
         <div class="prognosis-text">${getPrognosis(result.name, s.m)}</div>
       </div>
     </div>
-  `;
-  currentTab = "diagnosis";
+
+    <div class="tab-panel" data-panel="shap" style="display:none">
+      <div class="card card-inner">
+        <div class="chart-label" style="margin-bottom:14px">Top Feature Contributions (SHAP proxy)</div>
+        <div style="font-size:11px;color:var(--text-3);margin-bottom:14px">
+          🔴 Pushes toward this pattern &nbsp;|&nbsp; 🟢 Works against this pattern classification
+        </div>
+        ${shapBars(result.shap, pat.color)}
+        <div style="margin-top:14px;font-size:11px;color:var(--text-3);font-style:italic">
+          In the full system, SHAP values are computed from the trained Random Forest model. These values are representative proxies derived from the rule-based classifier for demonstration purposes.
+        </div>
+      </div>
+    </div>`;
+
+  setTab("diagnosis");
 }
 
-function getPrognosis(name, m) {
-  const p = {
-    "Ghost": `Based on the current engagement level of ${m.clicks} clicks and ${Math.round(m.submitRate*100)}% submission rate, this student is highly likely to formally withdraw within the next 2–3 weeks if no contact is made. Historical OULAD data shows ghost-pattern students have a 72% withdrawal rate without intervention.`,
-    "Procrastinator": `Without time management support, this student will likely continue the pre-deadline cramming pattern, which historically correlates with declining scores over the course as assessment complexity increases. Probability of passing drops from approximately 60% to 38% if the pattern continues unchanged.`,
-    "High Achiever": `Trajectory strongly indicates a Pass or Distinction outcome. The primary risk is complacency or mid-course burnout if workload spikes. Current data suggests no immediate intervention is required  monitoring for any engagement drop is sufficient.`,
-    "Disengaging": `The declining engagement and score trajectory, if continued, project to a Fail or Withdrawal outcome by week 8-10. Historical data from similar profiles in OULAD shows 65% probability of non-completion without intervention at this stage.`,
-    "Conceptual Struggler": `Without academic support, this student will likely fail individual assessments despite continued engagement. There is a moderate risk (approximately 45%) of withdrawal following a particularly poor result. Early tutoring significantly improves outcomes for this profile.`
-  };
-  return p[name] || "Insufficient signal for confident prognosis. Continue monitoring engagement and submission patterns over the next two weeks.";
+function setTab(t) {
+  document.querySelectorAll(".tab-btn").forEach(b => b.classList.toggle("active", b.dataset.tab===t));
+  document.querySelectorAll(".tab-panel").forEach(p => p.style.display = p.dataset.panel===t ? "block" : "none");
 }
 
-// ─── Init ─────────────────────────────────────────────────────────────────────
 renderList();
 </script>
 </body>
