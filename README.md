@@ -1,4 +1,4 @@
-# PatternDx — Pattern-Based Diagnostic System for Student Struggle in Online Learning
+# PatternDx - Pattern-Based Diagnostic System for Student Struggle in Online Learning
 
 **CS907 MSc Dissertation | University of Warwick | u5734711**  
 Supervisor: Prof. Long Tran-Thanh
@@ -34,7 +34,7 @@ PatternDx is a prescriptive analytics system that identifies distinct modes of s
 
 | File | Description |
 |------|-------------|
-| `index.html` | PatternDx browser prototype — open in any browser, offline, no dependencies |
+| `index.html` | PatternDx browser prototype - open in any browser, offline, no dependencies |
 | `PatternDx_Pipeline.ipynb` | Full ML pipeline: data download, feature engineering, clustering, classification, SHAP, intervention mapping |
 | `requirements.txt` | Python dependencies |
 | `README.md` | This file |
@@ -43,13 +43,13 @@ PatternDx is a prescriptive analytics system that identifies distinct modes of s
 
 ## Running the Pipeline
 
-### Option A — Google Colab (recommended)
+### Option A - Google Colab (recommended)
 1. Open [colab.research.google.com](https://colab.research.google.com)
 2. File → Open notebook → GitHub → paste this repo URL
 3. Select `PatternDx_Pipeline.ipynb`
 4. Runtime → Run all (~15 min)
 
-### Option B — Local
+### Option B - Local
 ```bash
 pip install -r requirements.txt
 jupyter notebook PatternDx_Pipeline.ipynb
@@ -66,14 +66,14 @@ Open `index.html` in any browser. No server, no API, no internet connection requ
 Features:
 - 10 student profiles covering all 6 patterns
 - Diagnosis, Interventions, Prognosis, and Feature Importance tabs per student
-- Compare mode — select two students for side-by-side analysis
+- Compare mode - select two students for side-by-side analysis
 - SHAP-informed feature weights derived from actual OULAD pipeline run
 
 ---
 
 ## Dataset
 
-**OULAD** — Open University Learning Analytics Dataset  
+**OULAD** - Open University Learning Analytics Dataset  
 Kuzilek, J., Hlosta, M., & Zdrahal, Z. (2017). *Open University Learning Analytics Dataset*. Scientific Data, 4, 170171.  
 Available at: https://analyse.kmi.open.ac.uk/open_dataset  
 Licence: Creative Commons Attribution 4.0
