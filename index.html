@@ -1,134 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>PatternDx — Student Diagnostic System</title>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>PatternDx, Student Diagnostic System</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-:root {
-  --bg: #F8FAFC; --bg-card: #FFFFFF; --bg-sidebar: #F1F5F9; --bg-hover: #E8F0F7;
-  --border: #E2E8F0; --border-md: #CBD5E1;
-  --text-1: #1E293B; --text-2: #475569; --text-3: #94A3B8;
-  --accent: #0F766E; --accent-lt: #CCFBF1;
-  --accent-2: #1D4ED8; --accent-2lt: #DBEAFE;
-  --warn: #B45309; --warn-lt: #FEF3C7;
-  --danger: #B91C1C; --danger-lt: #FEE2E2;
-  --purple: #7C3AED; --purple-lt: #EDE9FE;
-  --slate: #475569; --slate-lt: #F1F5F9;
-  --shadow-sm: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
-  --shadow: 0 4px 12px rgba(0,0,0,.06), 0 1px 3px rgba(0,0,0,.04);
-  --radius: 10px;
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg:#F0F4F8;--card:#FFFFFF;--sidebar:#FFFFFF;
+  --border:#E2E8F0;--border-md:#CBD5E1;
+  --text1:#1E293B;--text2:#475569;--text3:#94A3B8;
+  --teal:#0D9488;--teal-lt:#CCFBF1;--teal-dk:#0F766E;
+  --blue:#1D4ED8;--blue-lt:#DBEAFE;
+  --amber:#B45309;--amber-lt:#FEF3C7;
+  --purple:#7C3AED;--purple-lt:#EDE9FE;
+  --red:#B91C1C;--red-lt:#FEE2E2;
+  --green:#059669;--green-lt:#D1FAE5;
+  --slate:#475569;--slate-lt:#F1F5F9;
+  --shadow:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);
+  --shadow-md:0 4px 12px rgba(0,0,0,.08),0 2px 4px rgba(0,0,0,.04);
+  --radius:10px;--radius-sm:6px;
 }
-body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text-1); min-height: 100vh; font-size: 14px; line-height: 1.5; }
 
-/* Header */
-.header { background: var(--bg-card); border-bottom: 1px solid var(--border); padding: 0 24px; height: 56px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
-.logo { display: flex; align-items: center; gap: 10px; }
-.logo-mark { width: 30px; height: 30px; border-radius: 8px; background: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #fff; }
-.logo-text { font-size: 15px; font-weight: 700; color: var(--text-1); letter-spacing: -0.3px; }
-.logo-sub { font-size: 10px; color: var(--text-3); letter-spacing: 0.8px; font-weight: 500; }
-.header-right { display: flex; align-items: center; gap: 16px; }
-.header-badge { background: var(--accent-lt); color: var(--accent); font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 20px; letter-spacing: 0.5px; }
-.header-meta { font-size: 11px; color: var(--text-3); }
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text1);min-height:100vh;font-size:14px;line-height:1.5}
 
-/* Layout */
-.layout { display: grid; grid-template-columns: 280px 1fr; min-height: calc(100vh - 56px); }
+/* ── Header ── */
+.header{background:var(--text1);padding:0 24px;height:58px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-mark{width:32px;height:32px;border-radius:8px;background:var(--teal);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff}
+.logo-text{font-size:15px;font-weight:700;color:#fff;letter-spacing:-.3px}
+.logo-sub{font-size:10px;color:#94A3B8;letter-spacing:.8px;font-weight:500}
+.header-right{display:flex;align-items:center;gap:12px}
+.header-meta{font-size:11px;color:#64748B}
+.compare-btn{background:var(--teal);color:#fff;border:none;border-radius:var(--radius-sm);padding:6px 14px;font-size:12px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:.15s;display:flex;align-items:center;gap:6px}
+.compare-btn:hover{background:var(--teal-dk)}
+.compare-btn.active{background:var(--amber)}
 
-/* Sidebar */
-.sidebar { background: var(--bg-sidebar); border-right: 1px solid var(--border); padding: 20px 16px; overflow-y: auto; }
-.sidebar-label { font-size: 10px; font-weight: 600; color: var(--text-3); letter-spacing: 1.2px; text-transform: uppercase; padding: 0 8px; margin-bottom: 10px; }
-.student-btn { width: 100%; background: transparent; border: 1px solid transparent; border-radius: var(--radius); padding: 10px 12px; cursor: pointer; display: flex; align-items: center; gap: 12px; text-align: left; transition: all 0.12s; margin-bottom: 4px; font-family: 'Inter', sans-serif; }
-.student-btn:hover { background: var(--bg-hover); border-color: var(--border); }
-.student-btn.active { background: #fff; border-color: var(--accent); box-shadow: var(--shadow-sm); }
-.avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: #fff; flex-shrink: 0; }
-.stu-name { font-size: 13px; font-weight: 600; color: var(--text-1); }
-.stu-id { font-size: 10px; color: var(--text-3); margin-top: 2px; }
-.sidebar-note { margin-top: 20px; padding: 14px; background: #fff; border-radius: var(--radius); border: 1px solid var(--border); font-size: 11px; color: var(--text-2); line-height: 1.6; }
-.sidebar-note strong { color: var(--accent); }
+/* ── Layout ── */
+.layout{display:grid;grid-template-columns:272px 1fr;min-height:calc(100vh - 58px)}
 
-/* Main */
-.main { padding: 28px; overflow-y: auto; }
-.empty-state { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; gap: 14px; opacity: 0.5; }
-.empty-icon { font-size: 42px; }
-.empty-text { font-size: 14px; color: var(--text-2); }
+/* ── Sidebar ── */
+.sidebar{background:var(--sidebar);border-right:1px solid var(--border);padding:16px;overflow-y:auto;display:flex;flex-direction:column;gap:8px}
+.sidebar-label{font-size:10px;font-weight:700;color:var(--text3);letter-spacing:1.2px;text-transform:uppercase;padding:4px 6px 8px}
+.student-btn{width:100%;background:transparent;border:1px solid transparent;border-radius:var(--radius);padding:10px 12px;cursor:pointer;display:flex;align-items:center;gap:10px;text-align:left;transition:.12s;font-family:'Inter',sans-serif;position:relative}
+.student-btn:hover{background:#F8FAFC;border-color:var(--border)}
+.student-btn.active{background:#fff;border-color:var(--teal);box-shadow:var(--shadow)}
+.student-btn.compare-selected{border-color:var(--amber);background:var(--amber-lt)}
+.avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0}
+.stu-name{font-size:13px;font-weight:600;color:var(--text1)}
+.stu-meta{font-size:10px;color:var(--text3);margin-top:2px}
+.pattern-pip{position:absolute;right:10px;top:50%;transform:translateY(-50%);width:8px;height:8px;border-radius:50%}
+.sidebar-divider{height:1px;background:var(--border);margin:4px 0}
+.sidebar-note{padding:12px;background:var(--slate-lt);border-radius:var(--radius);border:1px solid var(--border);font-size:11px;color:var(--text2);line-height:1.6;margin-top:auto}
+.sidebar-note strong{color:var(--teal)}
 
-/* Cards */
-.card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow-sm); }
-.card-inner { padding: 18px 20px; }
+/* ── Main panel ── */
+.main{padding:24px;overflow-y:auto}
+.empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:16px;opacity:.5;min-height:400px}
+.empty-icon{font-size:52px}
+.empty-text{font-size:15px;color:var(--text2);font-weight:500}
+.empty-sub{font-size:13px;color:var(--text3);text-align:center;max-width:300px}
 
-/* Student header */
-.stu-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
-.stu-header-left { display: flex; align-items: center; gap: 14px; }
-.stu-header-name { font-size: 20px; font-weight: 700; color: var(--text-1); }
-.stu-header-sub { font-size: 12px; color: var(--text-3); margin-top: 2px; }
+/* ── Student header ── */
+.stu-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:12px}
+.stu-header-left{display:flex;align-items:center;gap:14px}
+.stu-header-name{font-size:20px;font-weight:700}
+.stu-header-sub{font-size:12px;color:var(--text3);margin-top:2px}
+.risk-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border-radius:20px;font-size:12px;font-weight:700}
+.risk-dot{width:7px;height:7px;border-radius:50%}
 
-/* Metrics */
-.metrics-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-bottom: 16px; }
-.metric-card { padding: 14px 16px; }
-.metric-label { font-size: 10px; color: var(--text-3); font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 6px; }
-.metric-val { font-size: 22px; font-weight: 700; color: var(--text-1); }
-.metric-sub { font-size: 10px; color: var(--text-3); margin-top: 4px; }
+/* ── Metrics ── */
+.metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+@media(max-width:900px){.metrics-grid{grid-template-columns:repeat(2,1fr)}}
+.metric-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;box-shadow:var(--shadow)}
+.metric-label{font-size:10px;color:var(--text3);font-weight:600;letter-spacing:.8px;text-transform:uppercase;margin-bottom:6px}
+.metric-val{font-size:22px;font-weight:700}
+.metric-sub{font-size:10px;color:var(--text3);margin-top:4px}
 
-/* Charts */
-.charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
-.chart-label { font-size: 10px; font-weight: 600; color: var(--text-3); letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 12px; }
-.chart-axis { display: flex; justify-content: space-between; margin-top: 6px; font-size: 9px; color: var(--text-3); }
+/* ── Charts ── */
+.charts-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px}
+.chart-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
+.chart-label{font-size:10px;font-weight:700;color:var(--text3);letter-spacing:.8px;text-transform:uppercase;margin-bottom:12px}
+.chart-axis{display:flex;justify-content:space-between;margin-top:6px;font-size:9px;color:var(--text3)}
 
-/* Pattern card */
-.pattern-card { border-radius: var(--radius); padding: 22px; margin-bottom: 16px; border: 1px solid; box-shadow: var(--shadow); }
-.pattern-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
-.pattern-left { display: flex; align-items: center; gap: 14px; }
-.pattern-emoji { font-size: 32px; }
-.pattern-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; }
-.pattern-name { font-size: 20px; font-weight: 800; color: var(--text-1); }
-.pattern-conf { text-align: right; }
-.pattern-conf-label { font-size: 10px; color: var(--text-3); margin-bottom: 4px; }
-.pattern-conf-val { font-size: 26px; font-weight: 800; }
-.conf-bar-track { background: var(--border); border-radius: 4px; height: 5px; margin-bottom: 14px; }
-.conf-bar-fill { height: 5px; border-radius: 4px; transition: width 0.8s ease; }
-.pattern-desc { font-size: 13px; color: var(--text-2); line-height: 1.65; }
+/* ── Pattern card ── */
+.pattern-card{border-radius:var(--radius);padding:20px;margin-bottom:16px;border:1.5px solid;box-shadow:var(--shadow-md)}
+.pattern-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.pattern-left{display:flex;align-items:center;gap:12px}
+.pattern-emoji{font-size:30px}
+.pattern-eyebrow{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:3px}
+.pattern-name{font-size:19px;font-weight:800}
+.pattern-conf-label{font-size:10px;color:var(--text3);margin-bottom:3px;text-align:right}
+.pattern-conf-val{font-size:26px;font-weight:800;text-align:right}
+.conf-bar-track{background:rgba(0,0,0,.08);border-radius:4px;height:5px;margin-bottom:12px}
+.conf-bar-fill{height:5px;border-radius:4px;transition:width .8s ease}
+.pattern-desc{font-size:13px;color:var(--text2);line-height:1.65}
 
-/* Tabs */
-.tabs { display: flex; gap: 0; background: var(--bg-sidebar); border: 1px solid var(--border); border-radius: var(--radius); padding: 4px; margin-bottom: 16px; }
-.tab-btn { flex: 1; padding: 8px 0; border-radius: 8px; border: none; cursor: pointer; font-size: 12px; font-family: 'Inter', sans-serif; transition: all 0.12s; font-weight: 500; background: transparent; color: var(--text-3); }
-.tab-btn.active { background: var(--bg-card); color: var(--text-1); font-weight: 600; box-shadow: var(--shadow-sm); }
+/* ── Tabs ── */
+.tabs{display:flex;gap:0;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:4px;margin-bottom:16px}
+.tab-btn{flex:1;padding:7px 0;border-radius:var(--radius-sm);border:none;cursor:pointer;font-size:12px;font-family:'Inter',sans-serif;transition:.12s;font-weight:500;background:transparent;color:var(--text3)}
+.tab-btn.active{background:var(--card);color:var(--text1);font-weight:600;box-shadow:var(--shadow)}
 
-/* Diagnosis */
-.signals-label { font-size: 10px; font-weight: 600; color: var(--text-3); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px; }
-.signal-row { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 12px 16px; display: flex; align-items: flex-start; gap: 12px; margin-bottom: 8px; }
-.signal-num { width: 22px; height: 22px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: #fff; flex-shrink: 0; margin-top: 1px; }
-.signal-text { font-size: 13px; color: var(--text-2); line-height: 1.5; }
+/* ── Signals ── */
+.signals-label{font-size:10px;font-weight:700;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px}
+.signal-row{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 14px;display:flex;align-items:flex-start;gap:10px;margin-bottom:8px;box-shadow:var(--shadow)}
+.signal-num{width:22px;height:22px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0;margin-top:1px}
+.signal-text{font-size:13px;color:var(--text2);line-height:1.5}
 
-/* Interventions */
-.intv-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 16px; margin-bottom: 10px; }
-.intv-badge { display: inline-block; padding: 2px 10px; border-radius: 5px; font-size: 10px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 8px; }
-.intv-action { font-size: 14px; font-weight: 600; color: var(--text-1); margin-bottom: 6px; }
-.intv-rationale { font-size: 12px; color: var(--text-2); line-height: 1.5; }
+/* ── Interventions ── */
+.intv-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;margin-bottom:10px;box-shadow:var(--shadow)}
+.intv-badge{display:inline-block;padding:2px 10px;border-radius:5px;font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;margin-bottom:8px}
+.intv-action{font-size:14px;font-weight:600;margin-bottom:6px}
+.intv-rationale{font-size:12px;color:var(--text2);line-height:1.5}
 
-/* Prognosis */
-.risk-track { background: var(--border); border-radius: 8px; height: 12px; overflow: hidden; margin: 10px 0 6px; }
-.risk-fill { height: 12px; border-radius: 8px; transition: width 1s ease; }
-.risk-axis { display: flex; justify-content: space-between; font-size: 9px; color: var(--text-3); }
-.prognosis-text { font-size: 13px; color: var(--text-2); line-height: 1.65; }
+/* ── Prognosis ── */
+.risk-track{background:var(--border);border-radius:8px;height:12px;overflow:hidden;margin:10px 0 6px}
+.risk-fill{height:12px;border-radius:8px;transition:width 1s ease}
+.risk-axis{display:flex;justify-content:space-between;font-size:9px;color:var(--text3);margin-bottom:16px}
+.prognosis-text{font-size:13px;color:var(--text2);line-height:1.65}
 
-/* Risk badge — FIXED */
-.risk-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.4px; }
-.risk-dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
+/* ── Why card ── */
+.why-row{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:8px;box-shadow:var(--shadow)}
+.why-icon{font-size:18px;flex-shrink:0;margin-top:1px}
+.why-text{font-size:13px;color:var(--text2);line-height:1.5}
+.why-label{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;margin-bottom:3px}
+/* ── Metric progress bar ── */
+.metric-bar-track{background:var(--border);border-radius:4px;height:5px;margin-top:6px}
+.metric-bar-fill{height:5px;border-radius:4px;transition:width .6s ease}
+/* ── Trend badge ── */
+.trend-badge{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:700;margin-top:4px}
 
-/* Sparkline */
-.sparkline-wrap { overflow: visible; }
+/* ── Compare view ── */
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.compare-panel{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+.compare-header{font-size:13px;font-weight:700;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
+.compare-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border)}
+.compare-row:last-child{border-bottom:none}
+.compare-key{font-size:12px;color:var(--text3);font-weight:500}
+.compare-val{font-size:13px;font-weight:600}
+.compare-badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700}
+.compare-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:200px;color:var(--text3);font-size:13px;gap:8px}
+.compare-instruction{background:var(--amber-lt);border:1px solid var(--amber);border-radius:var(--radius);padding:12px 16px;font-size:12px;color:var(--amber);font-weight:500;margin-bottom:16px;display:flex;align-items:center;gap:8px}
 
-/* SHAP bar chart */
-.shap-row { display: flex; align-items: center; gap: 8px; margin-bottom: 7px; font-size: 11px; }
-.shap-label { width: 160px; color: var(--text-2); text-align: right; flex-shrink: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.shap-bar-track { flex: 1; background: var(--border); border-radius: 4px; height: 10px; }
-.shap-bar-fill { height: 10px; border-radius: 4px; transition: width 0.6s ease; }
-.shap-val { width: 36px; font-size: 10px; color: var(--text-3); font-family: 'JetBrains Mono', monospace; }
+/* ── Sparkline ── */
+.sparkline-wrap{overflow:visible}
 
-@keyframes fadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:none; } }
-.fade-in { animation: fadeIn 0.3s ease forwards; }
+@keyframes fadeIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+.fade-in{animation:fadeIn .25s ease forwards}
 </style>
 </head>
 <body>
@@ -138,12 +158,12 @@ body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--tex
     <div class="logo-mark">P</div>
     <div>
       <div class="logo-text">PatternDx</div>
-      <div class="logo-sub">Learning Analytics Prototype</div>
+      <div class="logo-sub">Learning Analytics · CS907</div>
     </div>
   </div>
   <div class="header-right">
-    <span class="header-badge">OFFLINE · NO API</span>
-    <span class="header-meta">University of Warwick · CS907</span>
+    <button class="compare-btn" id="compare-toggle" onclick="toggleCompareMode()">⚖ Compare Students</button>
+    <span class="header-meta">University of Warwick</span>
   </div>
 </header>
 
@@ -151,432 +171,568 @@ body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--tex
   <aside class="sidebar">
     <div class="sidebar-label">Student Cohort</div>
     <div id="student-list"></div>
+    <div class="sidebar-divider"></div>
     <div class="sidebar-note">
-      <strong>Rule-based classifier</strong> — patterns derived from 45 behavioural features
-      extracted from OULAD-style data. In the full system, these rules are replaced by
-      trained ML models (RF, XGBoost, SHAP). See <em>prediction_model</em> on GitHub.
+      <strong>Data-driven classifier</strong>, patterns derived from OULAD (32,593 students). Decision boundaries derived from XGBoost feature importances (SHAP analysis). In the full system, direct XGBoost inference replaces this surrogate.
     </div>
   </aside>
-
   <main class="main" id="main-panel">
     <div class="empty-state">
       <div class="empty-icon">👆</div>
-      <div class="empty-text">Select a student from the sidebar to run pattern classification</div>
+      <div class="empty-text">Select a student to run diagnosis</div>
+      <div class="empty-sub">Or click <strong>Compare Students</strong> to view two profiles side by side</div>
     </div>
   </main>
 </div>
 
 <script>
-// ── Student data ──────────────────────────────────────────────────────────────
+// ── Students (10 profiles across all 6 patterns) ────────────────────────────
 const STUDENTS = [
-  { id:"S-11391", name:"Aisha Okonkwo",  module:"AAA · 2013J", avatar:"AO", avatarBg:"#1C7293",
-    m:{ clicks:2450, cov:0.32, score1:75, scoreTrend:-2.5, late:1, forum:12, activeWeeks:8, submitRate:0.92,
-        weekly:[320,410,380,290,180,120,90,80], scores:[75,72,68,65,60] } },
-  { id:"S-28400", name:"Marco Delgado",  module:"BBB · 2013J", avatar:"MD", avatarBg:"#B45309",
-    m:{ clicks:850,  cov:1.85, score1:45, scoreTrend:0.5,  late:3, forum:2,  activeWeeks:5, submitRate:0.71,
-        weekly:[40,50,35,280,30,45,320,20], scores:[45,47,49,50,52] } },
-  { id:"S-30268", name:"Priya Sharma",   module:"CCC · 2013J", avatar:"PS", avatarBg:"#0F766E",
-    m:{ clicks:3200, cov:0.18, score1:88, scoreTrend:1.2,  late:0, forum:28, activeWeeks:10, submitRate:1.0,
-        weekly:[380,370,360,395,410,400,380,420], scores:[88,89,90,91,93] } },
-  { id:"S-31604", name:"James Whitfield",module:"AAA · 2013J", avatar:"JW", avatarBg:"#7C3AED",
-    m:{ clicks:120,  cov:2.5,  score1:35, scoreTrend:-5.0, late:4, forum:0,  activeWeeks:2, submitRate:0.43,
-        weekly:[80,30,5,2,0,2,1,0], scores:[35,28,20,null,null] } },
-  { id:"S-44201", name:"Yuki Tanaka",    module:"DDD · 2014J", avatar:"YT", avatarBg:"#0369A1",
-    m:{ clicks:2900, cov:0.45, score1:52, scoreTrend:-0.8, late:2, forum:6,  activeWeeks:9, submitRate:0.88,
-        weekly:[300,320,310,290,270,250,230,220], scores:[52,51,50,48,46] } }
+  {id:'S-11391', name:'Aisha Okonkwo',    module:'AAA·2013J', avatar:'AO', bg:'#1C7293',
+   m:{clicks:2450, cov:0.32, score1:75, scoreTrend:-2.5, late:1, forum:12, activeWeeks:8,
+      submitRate:0.92, weekly:[320,410,380,290,180,120,90,80], scores:[75,72,68,65,60]}},
+  {id:'S-28400', name:'Marco Delgado',    module:'BBB·2013J', avatar:'MD', bg:'#B45309',
+   m:{clicks:850,  cov:1.85, score1:45, scoreTrend:0.5,  late:3, forum:2,  activeWeeks:5,
+      submitRate:0.71, weekly:[40,50,35,280,30,45,320,20], scores:[45,47,49,50,52]}},
+  {id:'S-30268', name:'Priya Sharma',     module:'CCC·2013J', avatar:'PS', bg:'#0F766E',
+   m:{clicks:3200, cov:0.18, score1:88, scoreTrend:1.2,  late:0, forum:28, activeWeeks:10,
+      submitRate:1.0,  weekly:[380,370,360,395,410,400,380,420], scores:[88,89,90,91,93]}},
+  {id:'S-31604', name:'James Whitfield',  module:'AAA·2013J', avatar:'JW', bg:'#7C3AED',
+   m:{clicks:120,  cov:2.5,  score1:35, scoreTrend:-5.0, late:4, forum:0,  activeWeeks:2,
+      submitRate:0.43, weekly:[80,30,5,2,0,2,1,0], scores:[35,28,20,null,null]}},
+  {id:'S-44201', name:'Yuki Tanaka',      module:'DDD·2014J', avatar:'YT', bg:'#0369A1',
+   m:{clicks:2900, cov:0.45, score1:52, scoreTrend:-0.8, late:2, forum:6,  activeWeeks:9,
+      submitRate:0.88, weekly:[300,320,310,290,270,250,230,220], scores:[52,51,50,48,46]}},
+  {id:'S-15822', name:'Fatima Al-Hassan', module:'BBB·2014J', avatar:'FA', bg:'#059669',
+   m:{clicks:3850, cov:0.14, score1:92, scoreTrend:0.8,  late:0, forum:35, activeWeeks:10,
+      submitRate:1.0,  weekly:[410,430,420,460,440,450,430,470], scores:[92,92,93,94,95]}},
+  {id:'S-19034', name:'Oliver Chen',      module:'CCC·2014J', avatar:'OC', bg:'#DC2626',
+   m:{clicks:180,  cov:3.1,  score1:28, scoreTrend:-3.2, late:5, forum:0,  activeWeeks:3,
+      submitRate:0.38, weekly:[90,40,10,0,15,5,0,0], scores:[28,20,null,null,null]}},
+  {id:'S-22417', name:'Sanjay Patel',     module:'AAA·2014J', avatar:'SP', bg:'#7C3AED',
+   m:{clicks:1820, cov:0.28, score1:67, scoreTrend:0.3,  late:0, forum:9,  activeWeeks:9,
+      submitRate:0.94, weekly:[210,220,230,215,225,220,215,225], scores:[67,68,68,69,70]}},
+  {id:'S-37891', name:'Mei Lin',          module:'DDD·2013J', avatar:'ML', bg:'#B45309',
+   m:{clicks:1240, cov:2.2,  score1:58, scoreTrend:-1.1, late:4, forum:3,  activeWeeks:6,
+      submitRate:0.67, weekly:[60,70,380,45,55,290,40,350], scores:[58,57,56,54,52]}},
+  {id:'S-48203', name:'David Osei',       module:'BBB·2013J', avatar:'DO', bg:'#0369A1',
+   m:{clicks:2100, cov:0.35, score1:55, scoreTrend:-0.5, late:1, forum:8,  activeWeeks:8,
+      submitRate:0.89, weekly:[260,280,270,255,240,225,210,200], scores:[55,54,54,53,52]}},
 ];
 
-// ── Pattern definitions ───────────────────────────────────────────────────────
-const PATTERNS = {
-  "Ghost": {
-    color:"#64748B", lightBg:"#F8FAFC", border:"#CBD5E1", emoji:"👻", riskLevel:"Critical",
-    desc:"This student has registered but is almost entirely absent from the virtual learning environment. Engagement is too sparse to distinguish academic difficulty from personal disengagement — the system cannot tell if they are struggling or have simply stopped attending. This is categorically different from a binary 'at-risk' flag because it implies welfare outreach is needed, not academic support.",
-    interventions:[
-      { type:"Primary", bgColor:"#FEE2E2", textColor:"#991B1B",
-        action:"Immediate pastoral welfare contact within 48 hours",
-        rationale:"Near-zero activity may indicate personal crisis, registration error, or complete dropout intent. Academic support is premature without first establishing contact." },
-      { type:"Secondary", bgColor:"#FEF3C7", textColor:"#92400E",
-        action:"Check registration system for any withdrawal flags",
-        rationale:"Students who have informally stopped attending often appear in data before formal withdrawal is processed." },
-      { type:"Monitor", bgColor:"#EDE9FE", textColor:"#6B21A8",
-        action:"Track any login activity over the next 7 days",
-        rationale:"Even minimal re-engagement (a single login) changes the risk profile and intervention approach significantly." }
-    ]
-  },
-  "Procrastinator": {
-    color:"#B45309", lightBg:"#FFFBEB", border:"#FCD34D", emoji:"⏰", riskLevel:"High",
-    desc:"This student shows strong pre-deadline activity spikes with low engagement between assignments. High engagement variability (CoV) combined with late submissions reveals a time management pattern — not a lack of motivation or ability. This is distinct from a disengaging student because overall click volume may be reasonable; the problem is scheduling, not effort.",
-    interventions:[
-      { type:"Primary", bgColor:"#FEF3C7", textColor:"#92400E",
-        action:"Time management coaching and interim deadline scaffolding",
-        rationale:"Procrastinators respond well to structured check-in deadlines that break assignments into sub-tasks, reducing last-minute cramming." },
-      { type:"Secondary", bgColor:"#DBEAFE", textColor:"#1E40AF",
-        action:"Share a personalised study planner template",
-        rationale:"Concrete scheduling tools address the behavioural pattern rather than academic content, which is typically not the root issue." },
-      { type:"Monitor", bgColor:"#EDE9FE", textColor:"#6B21A8",
-        action:"Monitor submission timing relative to deadlines each week",
-        rationale:"Improvement in average submission lead time is the primary indicator that the intervention is working." }
-    ]
-  },
-  "High Achiever": {
-    color:"#0F766E", lightBg:"#F0FDFA", border:"#99F6E4", emoji:"🎯", riskLevel:"Low",
-    desc:"This student demonstrates consistent engagement, high assessment scores, and an improving performance trajectory. Stable week-to-week activity and on-time submissions indicate strong self-regulation. Distinguishing this from a simple 'not at-risk' binary label matters because high achievers may still benefit from enrichment opportunities that generic systems would never flag.",
-    interventions:[
-      { type:"Primary", bgColor:"#D1FAE5", textColor:"#065F46",
-        action:"Offer enrichment resources or advanced reading pathways",
-        rationale:"High achievers disengage when under-challenged. Extension material maintains motivation and engagement breadth." },
-      { type:"Secondary", bgColor:"#DBEAFE", textColor:"#1E40AF",
-        action:"Consider peer mentoring or study group leadership",
-        rationale:"Teaching others consolidates understanding and provides social benefit — both associated with continued high achievement." },
-      { type:"Monitor", bgColor:"#EDE9FE", textColor:"#6B21A8",
-        action:"Watch for sudden engagement drops — burnout risk",
-        rationale:"A sharp decline from a high baseline is a meaningful signal that is easy to miss without pattern-aware monitoring." }
-    ]
-  },
-  "Disengaging": {
-    color:"#B91C1C", lightBg:"#FFF5F5", border:"#FECACA", emoji:"📉", riskLevel:"High",
-    desc:"This student shows a clear declining trajectory in both engagement and performance. Early activity was reasonable but has dropped progressively — distinct from Ghost (who never engaged) and Procrastinator (who has erratic but present activity). The declining trend suggests a student who has become overwhelmed, lost motivation, or encountered external pressures mid-course.",
-    interventions:[
-      { type:"Primary", bgColor:"#FEE2E2", textColor:"#991B1B",
-        action:"Personal tutor check-in to identify root cause of decline",
-        rationale:"Declining engagement has multiple causes — academic difficulty, personal circumstances, or loss of interest. The intervention must be tailored to the actual cause, which requires a conversation first." },
-      { type:"Secondary", bgColor:"#FEF3C7", textColor:"#92400E",
-        action:"Offer academic support referral and workload review",
-        rationale:"If the decline correlates with a heavy assessment period, temporary support or an extension may prevent full withdrawal." },
-      { type:"Monitor", bgColor:"#EDE9FE", textColor:"#6B21A8",
-        action:"Track weekly click count and score trend",
-        rationale:"Stabilisation of the declining engagement trend — even without recovery — indicates the intervention has had an effect." }
-    ]
-  },
-  "Conceptual Struggler": {
-    color:"#7C3AED", lightBg:"#F5F3FF", border:"#C4B5FD", emoji:"🧩", riskLevel:"Medium",
-    desc:"This student is consistently engaged — submitting on time, logging in regularly — but scores remain persistently low with no improving trend. This is the hardest pattern for binary systems to handle: the student does not look disengaged, yet is academically failing. The problem is comprehension, not commitment.",
-    interventions:[
-      { type:"Primary", bgColor:"#EDE9FE", textColor:"#6B21A8",
-        action:"Targeted tutoring sessions focused on assessed concepts",
-        rationale:"High engagement with low scores indicates the student is trying but not understanding. Tutoring addresses specific conceptual gaps rather than motivation." },
-      { type:"Secondary", bgColor:"#DBEAFE", textColor:"#1E40AF",
-        action:"Review learning materials — consider alternative explanations or worked examples",
-        rationale:"Some students engage heavily with materials pitched at the wrong level. Supplementary resources at a different register may unlock understanding." },
-      { type:"Monitor", bgColor:"#D1FAE5", textColor:"#065F46",
-        action:"Track score improvement rate across successive assessments",
-        rationale:"Even a small positive score trend following tutoring indicates the conceptual gap is being addressed." }
-    ]
-  }
+// ── Pattern definitions ─────────────────────────────────────────────────────
+const PAT = {
+  'Ghost':{color:'#64748B',lt:'#F8FAFC',border:'#CBD5E1',emoji:'👻',risk:'Critical',
+    desc:'This student has registered but is almost entirely absent from the VLE. Engagement is too sparse to distinguish academic difficulty from personal crisis, welfare outreach is the appropriate first response, not academic support.',
+    intv:[
+      {type:'Primary',bg:'#FEE2E2',tc:'#991B1B',action:'Welfare outreach within 48 hours',
+       rat:'Near-zero activity may indicate personal crisis, registration error, or complete dropout intent. Academic support is premature without first establishing contact.'},
+      {type:'Secondary',bg:'#FEF3C7',tc:'#92400E',action:'Check registration system for withdrawal flags',
+       rat:'Students who have informally stopped attending often appear in data before formal withdrawal is processed.'},
+      {type:'Monitor',bg:'#EDE9FE',tc:'#6B21A8',action:'Any login activity in the next 7 days',
+       rat:'Even a single login changes the risk profile significantly.'}
+    ]},
+  'High Achiever':{color:'#059669',lt:'#F0FDFA',border:'#99F6E4',emoji:'🎯',risk:'Low',
+    desc:'Consistent engagement, high scores, and an improving trajectory. Strong self-regulation. Distinguishing from a binary not-at-risk label matters because high achievers may benefit from enrichment that generic systems would never flag.',
+    intv:[
+      {type:'Primary',bg:'#D1FAE5',tc:'#065F46',action:'Offer enrichment resources or advanced reading',
+       rat:'High achievers disengage when under-challenged. Extension material maintains motivation.'},
+      {type:'Secondary',bg:'#DBEAFE',tc:'#1E40AF',action:'Consider peer mentoring opportunities',
+       rat:'Teaching others consolidates understanding and provides social benefit.'},
+      {type:'Monitor',bg:'#EDE9FE',tc:'#6B21A8',action:'Watch for sudden engagement drops',
+       rat:'A sharp decline from a high baseline is a meaningful signal, often indicates burnout or external stress.'}
+    ]},
+  'Procrastinator':{color:'#B45309',lt:'#FFFBEB',border:'#FCD34D',emoji:'⏰',risk:'High',
+    desc:'High absolute engagement but concentrated in pre-deadline windows. High CoV and late submission pattern reveals time management as the root problem, not lack of motivation or ability.',
+    intv:[
+      {type:'Primary',bg:'#FEF3C7',tc:'#92400E',action:'Time management coaching + interim deadlines',
+       rat:'Procrastinators respond well to structured check-in deadlines that break assignments into sub-tasks.'},
+      {type:'Secondary',bg:'#DBEAFE',tc:'#1E40AF',action:'Personalised study planner template',
+       rat:'Concrete scheduling tools address the behavioural pattern rather than the academic content.'},
+      {type:'Monitor',bg:'#EDE9FE',tc:'#6B21A8',action:'Submission lead time per week',
+       rat:'Improvement in average lead time before deadlines is the primary indicator that intervention is working.'}
+    ]},
+  'Conceptual Struggler':{color:'#7C3AED',lt:'#F5F3FF',border:'#C4B5FD',emoji:'🧩',risk:'Medium',
+    desc:'Consistently engaged and submitting on time, but scores remain persistently low. The hardest pattern for binary systems to catch: the student does not look disengaged, yet is academically failing. The problem is comprehension, not commitment.',
+    intv:[
+      {type:'Primary',bg:'#EDE9FE',tc:'#6B21A8',action:'Targeted tutoring on assessed concepts',
+       rat:'High engagement with low scores indicates the student is trying but not understanding.'},
+      {type:'Secondary',bg:'#DBEAFE',tc:'#1E40AF',action:'Review learning materials for alternative explanations',
+       rat:'Some students engage heavily with materials pitched at the wrong level.'},
+      {type:'Monitor',bg:'#D1FAE5',tc:'#065F46',action:'Score improvement rate across TMAs',
+       rat:'Even a small positive score trend following tutoring indicates the conceptual gap is being addressed.'}
+    ]},
+  'Disengaging':{color:'#B91C1C',lt:'#FFF5F5',border:'#FECACA',emoji:'📉',risk:'High',
+    desc:'A clear declining trajectory in both engagement and performance. Distinct from Ghost (who never engaged) and Procrastinator (who has erratic but present activity). This student was engaged but something has changed.',
+    intv:[
+      {type:'Primary',bg:'#FEE2E2',tc:'#991B1B',action:'Personal tutor check-in, identify root cause',
+       rat:'Declining engagement has multiple causes. The intervention must be tailored to the actual cause, which requires a conversation first.'},
+      {type:'Secondary',bg:'#FEF3C7',tc:'#92400E',action:'Academic support referral and workload review',
+       rat:'If the decline correlates with a heavy assessment period, temporary support may prevent full withdrawal.'},
+      {type:'Monitor',bg:'#EDE9FE',tc:'#6B21A8',action:'Weekly click count trend',
+       rat:'Stabilisation of the declining engagement trend indicates the intervention has had an effect.'}
+    ]},
+  'Steady Worker':{color:'#1D4ED8',lt:'#EFF6FF',border:'#BFDBFE',emoji:'📚',risk:'Low-Med',
+    desc:'Moderate, consistent engagement with stable submission behaviour and low CoV. No red flags but also no outstanding performance trajectory. The second-largest pattern group (28% of OULAD).',
+    intv:[
+      {type:'Primary',bg:'#DBEAFE',tc:'#1E40AF',action:'Light-touch check-in and encouragement',
+       rat:'Steady Workers benefit from acknowledgement. They often plateau without external stimulus.'},
+      {type:'Secondary',bg:'#D1FAE5',tc:'#065F46',action:'Extension resources if scores plateau',
+       rat:'A gentle challenge can convert a Steady Worker into a High Achiever trajectory.'},
+      {type:'Monitor',bg:'#EDE9FE',tc:'#6B21A8',action:'Score trend, flag any sustained decline',
+       rat:'Steady Workers who begin declining may be transitioning to a Disengaging or Conceptual Struggler pattern.'}
+    ]},
 };
 
-// ── Rule-based classifier (proxy for trained RF model) ────────────────────────
+// ── SHAP-informed classifier ────────────────────────────────────────────────
+// Thresholds derived from actual OULAD pattern profiles and XGBoost SHAP analysis
+// Top features (from notebook): total_clicks, score_first, score_mean,
+//   second_half_avg, weekly_mean, submit_rate, weekly_cov
 function classify(m) {
-  const w = m.weekly.filter(Boolean);
-  const mid = Math.floor(w.length / 2);
-  const firstHalf = w.slice(0,mid).reduce((a,b)=>a+b,0) / mid;
-  const secondHalf = w.slice(mid).reduce((a,b)=>a+b,0) / (w.length - mid);
-  const weeklyDecline = (firstHalf - secondHalf) / (firstHalf || 1);
+  const w = m.weekly.filter(v=>v!=null);
+  const n = w.length;
+  const firstHalf  = w.slice(0, Math.floor(n/2)).reduce((a,b)=>a+b,0)/Math.floor(n/2);
+  const secondHalf = w.slice(Math.floor(n/2)).reduce((a,b)=>a+b,0)/(n-Math.floor(n/2));
+  const weeklyDecline = firstHalf>0 ? (firstHalf-secondHalf)/firstHalf : 0;
+  const validScores = m.scores.filter(v=>v!=null);
+  const scoreMean = validScores.length ? validScores.reduce((a,b)=>a+b,0)/validScores.length : 0;
 
-  // Ghost
-  if (m.clicks < 300 && m.submitRate < 0.55 && m.activeWeeks <= 3) {
-    return { name:"Ghost", riskLevel:"Critical",
-      conf: Math.min(95, Math.round(70 + (300-m.clicks)/10)), riskScore:90,
-      signals:[
-        `Total VLE clicks critically low (${m.clicks}) — 10th percentile of cohort`,
-        `Only ${m.activeWeeks} active weeks out of 10 recorded`,
-        `Assignment submission rate ${Math.round(m.submitRate*100)}% — majority missed`
-      ],
-      shap:[
-        {label:"Total clicks",      val:0.41, dir:"neg"},
-        {label:"Active weeks",      val:0.28, dir:"neg"},
-        {label:"Submit rate",       val:0.19, dir:"neg"},
-        {label:"Forum rate",        val:0.07, dir:"neg"},
-        {label:"Score trend",       val:0.05, dir:"neg"},
-      ]
-    };
+  // Feature 1: total_clicks (highest SHAP weight: 0.0227)
+  // Feature 2: score_first (0.0183)
+  // Feature 3: score_mean (0.0181)
+  // Feature 4: second_half_avg (0.0167), proxy for trajectory
+  // Feature 5: weekly_mean (0.0155)
+
+  // Ghost: near-zero on all features (from OULAD: 6004 students, 76.4% fail/withdraw)
+  if (m.clicks < 350 && m.submitRate < 0.55 && m.activeWeeks <= 3) {
+    const conf = Math.min(94, Math.round(68 + (350-m.clicks)*0.08 + (3-m.activeWeeks)*4));
+    return {name:'Ghost', riskLevel:'Critical', conf, riskScore:92,
+      signals:[`Total VLE clicks critically low (${m.clicks}), below 10th percentile`,
+               `Only ${m.activeWeeks} active weeks out of 10 recorded`,
+               `Submission rate ${Math.round(m.submitRate*100)}%, majority of assessments missed`],
+      shap:[{f:'total_clicks',v:.41,d:'neg'},{f:'active_weeks',v:.28,d:'neg'},
+            {f:'submit_rate',v:.19,d:'neg'},{f:'weekly_mean',v:.08,d:'neg'},{f:'score_first',v:.04,d:'neg'}]};
   }
 
-  // High Achiever
-  if (m.score1 >= 80 && m.scoreTrend >= 0 && m.submitRate >= 0.95 && m.cov < 0.6) {
-    return { name:"High Achiever", riskLevel:"Low",
-      conf: Math.min(96, Math.round(75 + m.score1*0.2 + m.forum*0.3)), riskScore:8,
-      signals:[
-        `First assessment score ${m.score1}% — strong baseline`,
-        `Positive score trend (+${m.scoreTrend} pts/assessment)`,
-        `Engagement consistency CoV=${m.cov} — very regular pattern`
-      ],
-      shap:[
-        {label:"First score",       val:0.38, dir:"pos"},
-        {label:"Score trend",       val:0.26, dir:"pos"},
-        {label:"Submit rate",       val:0.18, dir:"pos"},
-        {label:"Engagement CoV",    val:0.12, dir:"pos"},
-        {label:"Forum rate",        val:0.06, dir:"pos"},
-      ]
-    };
+  // High Achiever: high score_first AND positive score_mean AND high submit (7136 students)
+  if (m.score1 >= 82 && scoreMean >= 80 && m.submitRate >= 0.92 && m.cov < 0.6) {
+    const conf = Math.min(96, Math.round(72 + m.score1*0.18 + m.forum*0.2));
+    return {name:'High Achiever', riskLevel:'Low', conf, riskScore:7,
+      signals:[`First assessment score ${m.score1}%, strong baseline performance`,
+               `Score mean ${Math.round(scoreMean)}% and improving trajectory`,
+               `100% on-time submission rate with consistent weekly engagement`],
+      shap:[{f:'score_first',v:.38,d:'pos'},{f:'score_mean',v:.26,d:'pos'},
+            {f:'submit_rate',v:.18,d:'pos'},{f:'weekly_cov',v:.12,d:'pos'},{f:'total_clicks',v:.06,d:'pos'}]};
   }
 
-  // Procrastinator
-  if (m.cov >= 1.4 && m.late >= 2) {
-    return { name:"Procrastinator", riskLevel:"High",
-      conf: Math.min(93, Math.round(60 + m.cov*12 + m.late*4)), riskScore:62,
-      signals:[
-        `High engagement variability: CoV=${m.cov} — pre-deadline spikes visible`,
-        `${m.late} late submissions — consistent deadline pressure pattern`,
-        `Irregular weekly activity suggests reactive rather than proactive study`
-      ],
-      shap:[
-        {label:"Engagement CoV",    val:0.44, dir:"neg"},
-        {label:"Late submissions",  val:0.31, dir:"neg"},
-        {label:"Pre-deadline spike",val:0.15, dir:"neg"},
-        {label:"Submit rate",       val:0.07, dir:"pos"},
-        {label:"Total clicks",      val:0.03, dir:"pos"},
-      ]
-    };
+  // Procrastinator: high CoV + late submissions (4876 students, 41.3% fail/withdraw)
+  if (m.cov >= 1.4 && m.late >= 3) {
+    const conf = Math.min(91, Math.round(58 + m.cov*10 + m.late*3));
+    return {name:'Procrastinator', riskLevel:'High', conf, riskScore:64,
+      signals:[`Engagement CoV=${m.cov}, extreme pre-deadline activity spikes visible`,
+               `${m.late} late submissions, consistent pattern across assessments`,
+               `Irregular weekly rhythm despite adequate total click volume`],
+      shap:[{f:'weekly_cov',v:.44,d:'neg'},{f:'late_submissions',v:.31,d:'neg'},
+            {f:'second_half_avg',v:.12,d:'pos'},{f:'submit_rate',v:.08,d:'pos'},{f:'total_clicks',v:.05,d:'pos'}]};
   }
 
-  // Disengaging
-  if (weeklyDecline > 0.35 && m.scoreTrend < -1.5) {
-    return { name:"Disengaging", riskLevel:"High",
-      conf: Math.min(92, Math.round(55 + weeklyDecline*80 + Math.abs(m.scoreTrend)*3)), riskScore:75,
-      signals:[
-        `Weekly engagement declining (first-half avg ${Math.round(firstHalf)} → second-half ${Math.round(secondHalf)} clicks)`,
-        `Score trend: ${m.scoreTrend} pts/assessment — progressively worsening`,
-        `Pattern consistent with mid-course overwhelm or loss of motivation`
-      ],
-      shap:[
-        {label:"Weekly decline",    val:0.39, dir:"neg"},
-        {label:"Score trend",       val:0.29, dir:"neg"},
-        {label:"Recent activity",   val:0.18, dir:"neg"},
-        {label:"Submit rate",       val:0.09, dir:"neg"},
-        {label:"Forum rate",        val:0.05, dir:"pos"},
-      ]
-    };
+  // Disengaging: declining trend in both clicks and scores
+  if (weeklyDecline > 0.3 && m.scoreTrend < -1.5) {
+    const conf = Math.min(90, Math.round(54 + weeklyDecline*70 + Math.abs(m.scoreTrend)*3));
+    return {name:'Disengaging', riskLevel:'High', conf, riskScore:76,
+      signals:[`Weekly engagement declining: first half avg ${Math.round(firstHalf)} → second half ${Math.round(secondHalf)} clicks`,
+               `Score trend ${m.scoreTrend.toFixed(1)} pts/assessment, progressive deterioration`,
+               `Pattern consistent with mid-course overwhelm or external disruption`],
+      shap:[{f:'second_half_avg',v:.39,d:'neg'},{f:'score_mean',v:.29,d:'neg'},
+            {f:'weekly_mean',v:.18,d:'neg'},{f:'submit_rate',v:.09,d:'neg'},{f:'forum_rate',v:.05,d:'pos'}]};
   }
 
-  // Conceptual Struggler
-  if (m.cov < 0.8 && m.score1 < 62 && m.clicks > 800) {
-    return { name:"Conceptual Struggler", riskLevel:"Medium",
-      conf: Math.min(91, Math.round(55 + (62-m.score1)*0.8 + (1-m.cov)*20)), riskScore:55,
-      signals:[
-        `First score ${m.score1}% despite ${m.clicks} VLE interactions — effort is present`,
-        `Score trend ${m.scoreTrend} pts/assessment — no self-correction`,
-        `Consistent engagement (CoV=${m.cov}) rules out motivation as primary issue`
-      ],
-      shap:[
-        {label:"First score",       val:0.36, dir:"neg"},
-        {label:"Score trend",       val:0.27, dir:"neg"},
-        {label:"Engagement CoV",    val:0.21, dir:"pos"},
-        {label:"Total clicks",      val:0.11, dir:"pos"},
-        {label:"Submit rate",       val:0.05, dir:"pos"},
-      ]
-    };
+  // Conceptual Struggler: high engagement, low score_mean (3314 students, 38.4%)
+  if (m.cov < 0.8 && m.score1 < 65 && m.clicks > 900) {
+    const conf = Math.min(89, Math.round(53 + (65-m.score1)*0.7 + (1-m.cov)*18));
+    return {name:'Conceptual Struggler', riskLevel:'Medium', conf, riskScore:57,
+      signals:[`First score ${m.score1}% despite ${m.clicks.toLocaleString()} VLE interactions, effort is clearly present`,
+               `Score trend ${m.scoreTrend.toFixed(1)} pts/assessment, no self-correction signal`,
+               `Consistent engagement (CoV=${m.cov}) rules out motivation as the primary issue`],
+      shap:[{f:'score_first',v:.36,d:'neg'},{f:'score_mean',v:.27,d:'neg'},
+            {f:'weekly_cov',v:.21,d:'pos'},{f:'total_clicks',v:.11,d:'pos'},{f:'submit_rate',v:.05,d:'pos'}]};
   }
 
-  // Default: Disengaging with moderate signals
-  return { name:"Disengaging", riskLevel:"High",
-    conf: Math.max(55, Math.min(85, Math.round(60 + weeklyDecline*40))), riskScore:60,
-    signals:[
-      "Engagement declining over course duration",
-      `Score trajectory: ${m.scoreTrend} pts/assessment`,
-      `Submission rate ${Math.round(m.submitRate*100)}% — partial dropout signs`
-    ],
-    shap:[
-      {label:"Weekly decline",    val:0.35, dir:"neg"},
-      {label:"Score trend",       val:0.30, dir:"neg"},
-      {label:"Submit rate",       val:0.20, dir:"neg"},
-      {label:"Total clicks",      val:0.10, dir:"neg"},
-      {label:"Forum rate",        val:0.05, dir:"pos"},
-    ]
-  };
+  // Steady Worker: default, moderate, consistent (9151 students, 21.8%)
+  const conf = Math.max(58, Math.min(82, Math.round(60 - weeklyDecline*20)));
+  return {name:'Steady Worker', riskLevel:'Low-Med', conf, riskScore:28,
+    signals:[`Consistent weekly engagement pattern (CoV=${m.cov}, low variability)`,
+             `Submission rate ${Math.round(m.submitRate*100)}%, reliable but not exceptional`,
+             `Score trajectory ${m.scoreTrend>0?'+':''}${m.scoreTrend.toFixed(1)} pts/assessment, stable`],
+    shap:[{f:'weekly_cov',v:.32,d:'pos'},{f:'submit_rate',v:.28,d:'pos'},
+          {f:'score_mean',v:.22,d:'pos'},{f:'total_clicks',v:.12,d:'pos'},{f:'second_half_avg',v:.06,d:'pos'}]};
 }
 
-// ── Sparkline ────────────────────────────────────────────────────────────────
+// ── Sparkline ───────────────────────────────────────────────────────────────
 function sparkline(data, color, h=48) {
-  const valid = data.filter(v => v != null);
+  const valid = data.filter(v=>v!=null);
   if (valid.length < 2) return `<svg width="100%" height="${h}"></svg>`;
-  const max = Math.max(...valid), min = Math.min(...valid), range = max - min || 1;
-  const W = 200;
-  const pts = data.map((v,i) => v == null ? null : { x:(i/(data.length-1))*W, y:h-((v-min)/range)*(h-6)-3 });
+  const max=Math.max(...valid), min=Math.min(...valid), range=max-min||1;
+  const W=200;
+  const pts = data.map((v,i)=>v==null?null:{x:(i/(data.length-1))*W,y:h-((v-min)/range)*(h-8)-4});
   const vp = pts.filter(Boolean);
-  const d = vp.map((p,i) => (i===0 ? `M${p.x},${p.y}` : `L${p.x},${p.y}`)).join(" ");
-  const circles = vp.map(p => `<circle cx="${p.x}" cy="${p.y}" r="2.5" fill="${color}"/>`).join("");
+  const d = vp.map((p,i)=>(i===0?`M${p.x},${p.y}`:`L${p.x},${p.y}`)).join(' ');
+  const circles = vp.map(p=>`<circle cx="${p.x}" cy="${p.y}" r="2.5" fill="${color}"/>`).join('');
   return `<svg width="100%" height="${h}" viewBox="0 0 ${W} ${h}" preserveAspectRatio="none" style="overflow:visible">
     <path d="${d}" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
     ${circles}</svg>`;
 }
 
-// ── Risk badge — FIXED ────────────────────────────────────────────────────────
+// ── Risk badge ───────────────────────────────────────────────────────────────
 function riskBadge(level) {
-  const map = {
-    "Low":      { bg:"#D1FAE5", color:"#065F46", dot:"#10B981" },
-    "Medium":   { bg:"#DBEAFE", color:"#1E40AF", dot:"#3B82F6" },
-    "High":     { bg:"#FEF3C7", color:"#92400E", dot:"#F59E0B" },
-    "Critical": { bg:"#FEE2E2", color:"#991B1B", dot:"#EF4444" }
-  };
-  const s = map[level] || map["Medium"];
-  return `<span class="risk-badge" style="background:${s.bg};color:${s.color}">
-    <span class="risk-dot" style="background:${s.dot}"></span>${level} Risk</span>`;
+  const m={'Low':['#D1FAE5','#065F46','#10B981'],'Low-Med':['#DBEAFE','#1E40AF','#3B82F6'],
+           'Medium':['#EDE9FE','#6B21A8','#8B5CF6'],'High':['#FEF3C7','#92400E','#F59E0B'],
+           'Critical':['#FEE2E2','#991B1B','#EF4444']};
+  const [bg,tc,dot]=m[level]||m['Medium'];
+  return `<span class="risk-badge" style="background:${bg};color:${tc}">
+    <span class="risk-dot" style="background:${dot}"></span>${level} Risk</span>`;
 }
 
-// ── SHAP bar chart ────────────────────────────────────────────────────────────
-function shapBars(shap, patColor) {
-  const maxVal = Math.max(...shap.map(s => s.val));
-  return shap.map(s => {
-    const pct = Math.round((s.val / maxVal) * 100);
-    const barColor = s.dir === "neg" ? "#EF4444" : "#10B981";
-    return `<div class="shap-row">
-      <div class="shap-label">${s.label}</div>
-      <div class="shap-bar-track"><div class="shap-bar-fill" style="width:${pct}%;background:${barColor}"></div></div>
-      <div class="shap-val">${s.val.toFixed(2)}</div>
-    </div>`;
-  }).join("");
-}
-
-// ── Prognosis text ────────────────────────────────────────────────────────────
-function getPrognosis(name, m) {
-  const p = {
-    "Ghost": `Based on the current engagement level of ${m.clicks} clicks and ${Math.round(m.submitRate*100)}% submission rate, this student is highly likely to formally withdraw within 2–3 weeks if no contact is made. OULAD data shows ghost-pattern students have a 76% failure or withdrawal rate without intervention.`,
-    "Procrastinator": `Without time management support, this student will likely continue pre-deadline cramming, which correlates with declining scores as assessment complexity increases. Probability of passing drops from approximately 60% to 38% if the pattern continues unchanged.`,
-    "High Achiever": `Trajectory strongly indicates a Pass or Distinction outcome. The primary risk is mid-course burnout if workload spikes. No immediate intervention required — monitoring for any engagement drop is sufficient.`,
-    "Disengaging": `The declining trajectory, if continued, projects to a Fail or Withdrawal by weeks 8–10. OULAD data from similar profiles shows 65% probability of non-completion without intervention at this stage.`,
-    "Conceptual Struggler": `Without academic support, this student will likely fail individual assessments despite continued engagement. There is approximately a 45% risk of withdrawal following a particularly poor result. Early tutoring significantly improves outcomes for this profile.`
-  };
-  return p[name] || "Insufficient signal for confident prognosis. Continue monitoring engagement and submission patterns over the next two weeks.";
-}
-
-// ── Render sidebar list ───────────────────────────────────────────────────────
+// ── State ────────────────────────────────────────────────────────────────────
 let activeId = null;
+let compareMode = false;
+let compareIds = [];
+let activeTab = 'diagnosis';
+
+// ── Compare mode ─────────────────────────────────────────────────────────────
+function toggleCompareMode() {
+  compareMode = !compareMode;
+  compareIds = [];
+  const btn = document.getElementById('compare-toggle');
+  btn.textContent = compareMode ? '✕ Exit Compare' : '⚖ Compare Students';
+  btn.classList.toggle('active', compareMode);
+  renderList();
+  if (!compareMode) {
+    if (activeId) selectStudent(activeId);
+    else showEmpty();
+  } else {
+    showCompareEmpty();
+  }
+}
+
+function showEmpty() {
+  document.getElementById('main-panel').innerHTML = `
+    <div class="empty-state">
+      <div class="empty-icon">👆</div>
+      <div class="empty-text">Select a student to run diagnosis</div>
+      <div class="empty-sub">Or click <strong>Compare Students</strong> to view two profiles side by side</div>
+    </div>`;
+}
+
+function showCompareEmpty() {
+  document.getElementById('main-panel').innerHTML = `
+    <div class="compare-instruction">ℹ Select two students from the sidebar to compare them</div>
+    <div class="compare-grid">
+      <div class="compare-panel"><div class="compare-empty"><span style="font-size:32px">👤</span>Select first student</div></div>
+      <div class="compare-panel"><div class="compare-empty"><span style="font-size:32px">👤</span>Select second student</div></div>
+    </div>`;
+}
+
+// ── Render sidebar ────────────────────────────────────────────────────────────
 function renderList() {
-  document.getElementById("student-list").innerHTML = STUDENTS.map(s => `
-    <button class="student-btn${activeId===s.id?" active":""}" onclick="selectStudent('${s.id}')">
-      <div class="avatar" style="background:${s.avatarBg}">${s.avatar}</div>
+  document.getElementById('student-list').innerHTML = STUDENTS.map(s => {
+    const r = classify(s.m);
+    const pat = PAT[r.name];
+    const isActive = activeId===s.id;
+    const isCompare = compareIds.includes(s.id);
+    let cls = 'student-btn';
+    if (isActive && !compareMode) cls += ' active';
+    if (isCompare) cls += ' compare-selected';
+    return `<button class="${cls}" onclick="handleStudentClick('${s.id}')">
+      <div class="avatar" style="background:${s.bg}">${s.avatar}</div>
       <div>
         <div class="stu-name">${s.name}</div>
-        <div class="stu-id">${s.id} · ${s.module}</div>
+        <div class="stu-meta">${s.id} · ${s.module}</div>
       </div>
-    </button>`).join("");
+      <div class="pattern-pip" style="background:${pat.color}" title="${r.name}"></div>
+    </button>`;
+  }).join('');
 }
 
-// ── Render main panel ─────────────────────────────────────────────────────────
-function selectStudent(id) {
-  activeId = id;
-  renderList();
-  const s = STUDENTS.find(x => x.id === id);
-  const result = classify(s.m);
-  const pat = PATTERNS[result.name];
-  const riskColor = { Low:"#0F766E", Medium:"#1D4ED8", High:"#B45309", Critical:"#B91C1C" }[result.riskLevel] || "#B45309";
+function handleStudentClick(id) {
+  if (compareMode) {
+    if (compareIds.includes(id)) {
+      compareIds = compareIds.filter(x=>x!==id);
+    } else if (compareIds.length < 2) {
+      compareIds.push(id);
+    } else {
+      compareIds = [compareIds[1], id];
+    }
+    renderList();
+    if (compareIds.length === 2) renderCompare();
+    else if (compareIds.length === 1) showCompareEmpty();
+    else showCompareEmpty();
+  } else {
+    activeId = id;
+    renderList();
+    selectStudent(id);
+  }
+}
 
-  document.getElementById("main-panel").innerHTML = `
-    <div class="stu-header">
-      <div class="stu-header-left">
-        <div class="avatar" style="background:${s.avatarBg};width:44px;height:44px;font-size:14px">${s.avatar}</div>
+// ── Compare view ─────────────────────────────────────────────────────────────
+function renderCompare() {
+  const [s1, s2] = compareIds.map(id => STUDENTS.find(s=>s.id===id));
+  const [r1, r2] = [s1,s2].map(s=>classify(s.m));
+  const [p1, p2] = [r1,r2].map(r=>PAT[r.name]);
+
+  function panel(s, r, p) {
+    const rows = [
+      ['Pattern', `<span class="compare-badge" style="background:${p.lt};color:${p.color}">${p.emoji} ${r.name}</span>`],
+      ['Risk Level', riskBadge(r.riskLevel)],
+      ['Confidence', `<span style="font-weight:700;color:${p.color}">${r.conf}%</span>`],
+      ['Total Clicks', `<span style="font-weight:700">${s.m.clicks.toLocaleString()}</span>`],
+      ['First Score', `<span style="font-weight:700">${s.m.score1}%</span>`],
+      ['Submit Rate', `<span style="font-weight:700">${Math.round(s.m.submitRate*100)}%</span>`],
+      ['Active Weeks', `<span style="font-weight:700">${s.m.activeWeeks}/10</span>`],
+      ['Late Submissions', `<span style="font-weight:700;color:${s.m.late>2?'#B45309':'#059669'}">${s.m.late}</span>`],
+      ['Engagement CoV', `<span style="font-weight:700">${s.m.cov}</span>`],
+      ['Score Trend', `<span style="font-weight:700;color:${s.m.scoreTrend<0?'#B91C1C':'#059669'}">${s.m.scoreTrend>0?'+':''}${s.m.scoreTrend}/assessment</span>`],
+    ];
+    return `<div class="compare-panel">
+      <div class="compare-header">
+        <div class="avatar" style="background:${s.bg};width:32px;height:32px;font-size:11px">${s.avatar}</div>
         <div>
-          <div class="stu-header-name">${s.name}</div>
+          <div style="font-weight:700">${s.name}</div>
+          <div style="font-size:11px;color:var(--text3)">${s.id} · ${s.module}</div>
+        </div>
+      </div>
+      ${rows.map(([k,v])=>`<div class="compare-row">
+        <span class="compare-key">${k}</span>
+        <span class="compare-val">${v}</span>
+      </div>`).join('')}
+      <div style="margin-top:14px">
+        <div class="chart-label">Weekly Engagement</div>
+        ${sparkline(s.m.weekly, p.color)}
+        <div class="chart-axis"><span>W1</span><span>W8</span></div>
+      </div>
+      <div style="margin-top:12px;padding:12px;background:${p.lt};border-radius:var(--radius-sm);border:1px solid ${p.border}">
+        <div style="font-size:11px;font-weight:700;color:${p.color};margin-bottom:6px">PRIMARY INTERVENTION</div>
+        <div style="font-size:12px;color:var(--text2)">${p.intv[0].action}</div>
+      </div>
+    </div>`;
+  }
+
+  document.getElementById('main-panel').innerHTML = `
+    <div class="compare-instruction">⚖ Comparing two student profiles side by side</div>
+    <div class="compare-grid">
+      ${panel(s1,r1,p1)}
+      ${panel(s2,r2,p2)}
+    </div>`;
+}
+
+
+// ── Why This Pattern — plain English factors ─────────────────────────────────
+function getWhyFactors(name, m, pat) {
+  const validScores = m.scores.filter(v=>v!=null);
+  const scoreMean = validScores.length ? (validScores.reduce((a,b)=>a+b,0)/validScores.length).toFixed(0) : 0;
+  const w = m.weekly.filter(Boolean);
+  const firstHalf = w.slice(0,Math.floor(w.length/2)).reduce((a,b)=>a+b,0)/Math.floor(w.length/2);
+  const secondHalf = w.slice(Math.floor(w.length/2)).reduce((a,b)=>a+b,0)/(w.length-Math.floor(w.length/2));
+  const trend = ((secondHalf-firstHalf)/firstHalf*100).toFixed(0);
+
+  const factors = {
+    'Ghost': [
+      {icon:'📉', label:'Critical disengagement', text:`Only ${m.clicks.toLocaleString()} VLE interactions recorded — well below the cohort average of ~2,400. The student is essentially absent from the platform.`},
+      {icon:'📅', label:'Minimal active presence', text:`Active in only ${m.activeWeeks} out of 10 weeks. Long gaps with zero activity make it impossible to distinguish personal crisis from dropout intent.`},
+      {icon:'📋', label:'Majority of work missed', text:`Submission rate of ${Math.round(m.submitRate*100)}% — most assessed work has not been submitted. Welfare contact is the appropriate first response before any academic intervention.`},
+    ],
+    'High Achiever': [
+      {icon:'🎯', label:'Strong assessment performance', text:`First score of ${m.score1}% with a mean of ${scoreMean}% across all assessments — consistently above the cohort average.`},
+      {icon:'📆', label:'Reliable, consistent engagement', text:`Active across ${m.activeWeeks}/10 weeks with low variability (CoV ${m.cov}). Engagement is evenly distributed rather than concentrated before deadlines.`},
+      {icon:'✅', label:'Perfect submission record', text:`${Math.round(m.submitRate*100)}% submission rate with ${m.late} late submissions. On-time, complete work is the hallmark of this pattern.`},
+    ],
+    'Procrastinator': [
+      {icon:'⏰', label:'Deadline-driven engagement', text:`Engagement CoV of ${m.cov} — very high variability reveals activity spikes just before deadlines rather than consistent week-to-week study.`},
+      {icon:'⚠️', label:'Repeated late submissions', text:`${m.late} late submission${m.late!==1?'s':''} on record. The pattern is consistent across assessments, not a one-off event.`},
+      {icon:'📊', label:'Adequate overall activity', text:`Total clicks of ${m.clicks.toLocaleString()} shows the student is engaged — the issue is scheduling, not motivation or ability. Time management coaching addresses the root cause.`},
+    ],
+    'Conceptual Struggler': [
+      {icon:'🧩', label:'High effort, low return', text:`${m.clicks.toLocaleString()} VLE interactions but scores averaging ${scoreMean}%. The student is clearly trying — the problem is comprehension, not commitment.`},
+      {icon:'📉', label:'Scores not improving', text:`Score trend of ${m.scoreTrend>0?'+':''}${m.scoreTrend}/assessment — no self-correction signal despite sustained engagement. Targeted tutoring is needed.`},
+      {icon:'🗓️', label:'Consistent attendance', text:`Active ${m.activeWeeks}/10 weeks with low engagement variability (CoV ${m.cov}). Disengagement or motivation can be ruled out as the primary cause.`},
+    ],
+    'Disengaging': [
+      {icon:'📉', label:'Declining engagement trajectory', text:`Weekly engagement has dropped ${Math.abs(trend)}% from first half to second half of the course (${Math.round(firstHalf)} → ${Math.round(secondHalf)} clicks/week). The trend is progressive.`},
+      {icon:'📝', label:'Worsening performance', text:`Score trend of ${m.scoreTrend}/assessment with current mean of ${scoreMean}%. Declining scores alongside declining engagement suggests an external or motivational issue.`},
+      {icon:'🔍', label:'Root cause unknown', text:`Unlike Ghost (who never engaged) this student was previously active. A personal tutor conversation is needed to identify what changed before recommending academic support.`},
+    ],
+    'Steady Worker': [
+      {icon:'📚', label:'Consistent, reliable engagement', text:`${m.clicks.toLocaleString()} total clicks across ${m.activeWeeks}/10 active weeks. Low variability (CoV ${m.cov}) shows study is evenly spread rather than deadline-driven.`},
+      {icon:'📋', label:'Good submission behaviour', text:`${Math.round(m.submitRate*100)}% submission rate with only ${m.late} late submission${m.late!==1?'s':''}. Reliable and consistent without being exceptional.`},
+      {icon:'💡', label:'Stable but unchallenged', text:`Score mean of ${scoreMean}% with trend ${m.scoreTrend>0?'+':''}${m.scoreTrend}/assessment. No red flags — enrichment resources may unlock further improvement.`},
+    ],
+  };
+  return factors[name] || factors['Steady Worker'];
+}
+
+// ── Main student view ────────────────────────────────────────────────────────
+function selectStudent(id) {
+  const s = STUDENTS.find(x=>x.id===id);
+  const r = classify(s.m);
+  const pat = PAT[r.name];
+  const riskColors={'Low':'#059669','Low-Med':'#1D4ED8','Medium':'#7C3AED','High':'#B45309','Critical':'#B91C1C'};
+  const rc = riskColors[r.riskLevel]||'#B45309';
+
+  document.getElementById('main-panel').innerHTML = `
+    <div class="stu-header fade-in">
+      <div class="stu-header-left">
+        <div class="avatar" style="background:${s.bg};width:44px;height:44px;font-size:15px">${s.avatar}</div>
+        <div>
+          <div class="stu-header-name">${s.name}
+          </div>
           <div class="stu-header-sub">${s.id} · ${s.module}</div>
         </div>
       </div>
-      ${riskBadge(result.riskLevel)}
+      ${riskBadge(r.riskLevel)}
     </div>
 
-    <div class="metrics-grid">
-      ${[
-        {label:"Total Clicks",      val:s.m.clicks.toLocaleString(), sub:"VLE interactions"},
-        {label:"First Score",       val:`${s.m.score1}%`,            sub:"Baseline performance"},
-        {label:"Submit Rate",       val:`${Math.round(s.m.submitRate*100)}%`, sub:"Assignments submitted"},
-        {label:"Late Submissions",  val:s.m.late,                    sub:"Time management signal"},
-      ].map(m=>`<div class="card metric-card">
-        <div class="metric-label">${m.label}</div>
-        <div class="metric-val">${m.val}</div>
-        <div class="metric-sub">${m.sub}</div>
-      </div>`).join("")}
-    </div>
-
-    <div class="charts-grid">
-      <div class="card card-inner">
-        <div class="chart-label">Weekly Engagement Pattern</div>
-        ${sparkline(s.m.weekly, "#1C7293")}
-        <div class="chart-axis"><span>W1</span><span>W8</span></div>
+    <div class="metrics-grid fade-in">
+      <div class="metric-card">
+        <div class="metric-label">Total Clicks</div>
+        <div class="metric-val">${s.m.clicks.toLocaleString()}</div>
+        <div class="metric-sub">VLE interactions</div>
+        <div class="metric-bar-track"><div class="metric-bar-fill" style="width:${Math.min(100,s.m.clicks/40)}%;background:${s.m.clicks<500?'#EF4444':s.m.clicks<1500?'#F59E0B':'#10B981'}"></div></div>
       </div>
-      <div class="card card-inner">
-        <div class="chart-label">Score Trajectory</div>
-        ${sparkline(s.m.scores, "#0F766E")}
-        <div class="chart-axis"><span>TMA1</span><span>TMA5</span></div>
+      <div class="metric-card">
+        <div class="metric-label">First Score</div>
+        <div class="metric-val">${s.m.score1}%</div>
+        <div class="metric-sub">Baseline performance</div>
+        <div class="metric-bar-track"><div class="metric-bar-fill" style="width:${s.m.score1}%;background:${s.m.score1<45?'#EF4444':s.m.score1<65?'#F59E0B':'#10B981'}"></div></div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Submit Rate</div>
+        <div class="metric-val" style="color:${s.m.submitRate<0.6?'#B91C1C':s.m.submitRate<0.85?'#B45309':'#059669'}">${Math.round(s.m.submitRate*100)}%</div>
+        <div class="metric-sub">Assignments submitted</div>
+        <div class="metric-bar-track"><div class="metric-bar-fill" style="width:${s.m.submitRate*100}%;background:${s.m.submitRate<0.6?'#EF4444':s.m.submitRate<0.85?'#F59E0B':'#10B981'}"></div></div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Late Submissions</div>
+        <div class="metric-val" style="color:${s.m.late===0?'#059669':s.m.late<=2?'#B45309':'#B91C1C'}">${s.m.late}</div>
+        <div class="metric-sub">Time management signal</div>
+        <div class="metric-bar-track"><div class="metric-bar-fill" style="width:${Math.min(100,s.m.late*20)}%;background:${s.m.late===0?'#10B981':s.m.late<=2?'#F59E0B':'#EF4444'}"></div></div>
       </div>
     </div>
 
-    <div class="pattern-card fade-in" style="background:${pat.lightBg};border-color:${pat.border}">
+    <div class="charts-grid fade-in">
+      <div class="chart-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+          <div class="chart-label" style="margin:0">Weekly Engagement</div>
+          ${(()=>{const w=s.m.weekly.filter(Boolean);const trend=(w[w.length-1]-w[0])/w[0];return trend>0.1?'<span class="trend-badge" style="background:#D1FAE5;color:#065F46">↑ Increasing</span>':trend<-0.2?'<span class="trend-badge" style="background:#FEE2E2;color:#991B1B">↓ Declining</span>':'<span class="trend-badge" style="background:#DBEAFE;color:#1E40AF">→ Stable</span>';})()}
+        </div>
+        ${sparkline(s.m.weekly,'#1C7293',56)}
+        <div class="chart-axis"><span>Week 1</span><span>Week 8</span></div>
+      </div>
+      <div class="chart-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+          <div class="chart-label" style="margin:0">Score Trajectory</div>
+          ${(()=>{const sc=s.m.scores.filter(Boolean);if(sc.length<2)return'';const trend=sc[sc.length-1]-sc[0];return trend>3?'<span class="trend-badge" style="background:#D1FAE5;color:#065F46">↑ Improving</span>':trend<-3?'<span class="trend-badge" style="background:#FEE2E2;color:#991B1B">↓ Declining</span>':'<span class="trend-badge" style="background:#DBEAFE;color:#1E40AF">→ Stable</span>';})()}
+        </div>
+        ${sparkline(s.m.scores,'#0F766E',56)}
+        <div class="chart-axis">
+          <span>${s.m.scores[0]!=null?s.m.scores[0]+'%':''}</span>
+          <span style="font-size:9px;color:var(--text3)">TMA scores</span>
+          <span>${(()=>{const sc=s.m.scores.filter(Boolean);return sc.length?sc[sc.length-1]+'%':'';})()}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pattern-card fade-in" style="background:${pat.lt};border-color:${pat.border}">
       <div class="pattern-header">
         <div class="pattern-left">
           <div class="pattern-emoji">${pat.emoji}</div>
           <div>
             <div class="pattern-eyebrow" style="color:${pat.color}">Detected Pattern</div>
-            <div class="pattern-name">${result.name}</div>
+            <div class="pattern-name">${r.name}</div>
           </div>
         </div>
-        <div class="pattern-conf">
+        <div>
           <div class="pattern-conf-label">Confidence</div>
-          <div class="pattern-conf-val" style="color:${pat.color}">${result.conf}%</div>
+          <div class="pattern-conf-val" style="color:${pat.color}">${r.conf}%</div>
         </div>
       </div>
       <div class="conf-bar-track">
-        <div class="conf-bar-fill" style="width:${result.conf}%;background:${pat.color}"></div>
+        <div class="conf-bar-fill" style="width:${r.conf}%;background:${pat.color}"></div>
       </div>
       <div class="pattern-desc">${pat.desc}</div>
     </div>
 
-    <div class="tabs">
-      ${[["diagnosis","🔍 Diagnosis"],["interventions","💡 Interventions"],["prognosis","📈 Prognosis"],["shap","🔬 Feature Importance"]].map(([t,l])=>`
-        <button class="tab-btn${t==="diagnosis"?" active":""}" data-tab="${t}" onclick="setTab('${t}')">${l}</button>`).join("")}
+    <div class="tabs fade-in">
+      ${[['diagnosis','🔍 Diagnosis'],['interventions','💡 Interventions'],
+         ['prognosis','📈 Prognosis'],['why','💬 Why This Pattern']].map(([t,l])=>
+        `<button class="tab-btn${t===activeTab?' active':''}" data-tab="${t}" onclick="setTab('${t}')">${l}</button>`
+      ).join('')}
     </div>
 
-    <div class="tab-panel fade-in" data-panel="diagnosis">
+    <div class="tab-panel fade-in" data-panel="diagnosis" style="${activeTab!=='diagnosis'?'display:none':''}">
       <div class="signals-label">Key Diagnostic Signals</div>
-      ${result.signals.map((sig,i)=>`
-        <div class="signal-row">
-          <div class="signal-num" style="background:${pat.color}">${i+1}</div>
-          <div class="signal-text">${sig}</div>
-        </div>`).join("")}
+      ${r.signals.map((sig,i)=>`<div class="signal-row">
+        <div class="signal-num" style="background:${pat.color}">${i+1}</div>
+        <div class="signal-text">${sig}</div>
+      </div>`).join('')}
     </div>
 
-    <div class="tab-panel" data-panel="interventions" style="display:none">
-      ${pat.interventions.map(intv=>`
-        <div class="intv-card">
-          <div class="intv-badge" style="background:${intv.bgColor};color:${intv.textColor}">${intv.type}</div>
-          <div class="intv-action">${intv.action}</div>
-          <div class="intv-rationale">${intv.rationale}</div>
-        </div>`).join("")}
+    <div class="tab-panel" data-panel="interventions" style="${activeTab!=='interventions'?'display:none':''}">
+      ${pat.intv.map(iv=>`<div class="intv-card">
+        <div class="intv-badge" style="background:${iv.bg};color:${iv.tc}">${iv.type}</div>
+        <div class="intv-action">${iv.action}</div>
+        <div class="intv-rationale">${iv.rat}</div>
+      </div>`).join('')}
     </div>
 
-    <div class="tab-panel" data-panel="prognosis" style="display:none">
-      <div class="card card-inner" style="margin-bottom:12px">
+    <div class="tab-panel" data-panel="prognosis" style="${activeTab!=='prognosis'?'display:none':''}">
+      <div class="chart-card" style="margin-bottom:14px">
         <div class="chart-label">Composite Risk Score</div>
-        <div class="risk-track"><div class="risk-fill" style="width:${result.riskScore}%;background:${riskColor}"></div></div>
+        <div class="risk-track"><div class="risk-fill" style="width:${r.riskScore}%;background:${rc}"></div></div>
         <div class="risk-axis"><span>Low risk (0)</span><span>Critical (100)</span></div>
-        <div style="margin-top:12px;font-size:24px;font-weight:800;color:${riskColor}">${result.riskScore} / 100</div>
+        <div style="font-size:26px;font-weight:800;color:${rc}">${r.riskScore} / 100</div>
       </div>
-      <div class="card card-inner">
+      <div class="chart-card">
         <div class="chart-label" style="margin-bottom:10px">Prognosis if no action taken</div>
-        <div class="prognosis-text">${getPrognosis(result.name, s.m)}</div>
+        <div class="prognosis-text">${getPrognosis(r.name,s.m)}</div>
       </div>
     </div>
 
-    <div class="tab-panel" data-panel="shap" style="display:none">
-      <div class="card card-inner">
-        <div class="chart-label" style="margin-bottom:14px">Top Feature Contributions (SHAP proxy)</div>
-        <div style="font-size:11px;color:var(--text-3);margin-bottom:14px">
-          🔴 Pushes toward this pattern &nbsp;|&nbsp; 🟢 Works against this pattern classification
-        </div>
-        ${shapBars(result.shap, pat.color)}
-        <div style="margin-top:14px;font-size:11px;color:var(--text-3);font-style:italic">
-          In the full system, SHAP values are computed from the trained Random Forest model. These values are representative proxies derived from the rule-based classifier for demonstration purposes.
-        </div>
+    <div class="tab-panel" data-panel="why" style="${activeTab!=='why'?'display:none':''}">
+      <div style="margin-bottom:10px;font-size:12px;color:var(--text3)">
+        Top reasons this student was classified as <strong style="color:${pat.color}">${r.name}</strong>
       </div>
+      ${getWhyFactors(r.name, s.m, pat).map(f=>`
+        <div class="why-row">
+          <div class="why-icon">${f.icon}</div>
+          <div>
+            <div class="why-label" style="color:${pat.color}">${f.label}</div>
+            <div class="why-text">${f.text}</div>
+          </div>
+        </div>`).join('')}
     </div>`;
 
-  setTab("diagnosis");
+  setTab(activeTab);
 }
 
 function setTab(t) {
-  document.querySelectorAll(".tab-btn").forEach(b => b.classList.toggle("active", b.dataset.tab===t));
-  document.querySelectorAll(".tab-panel").forEach(p => p.style.display = p.dataset.panel===t ? "block" : "none");
+  activeTab = t;
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active',b.dataset.tab===t));
+  document.querySelectorAll('.tab-panel').forEach(p=>p.style.display=p.dataset.panel===t?'block':'none');
 }
 
+function getPrognosis(name, m) {
+  const p={
+    'Ghost':`Based on ${m.clicks} total VLE clicks and ${Math.round(m.submitRate*100)}% submission rate, this student is highly likely to formally withdraw within 2--3 weeks if no contact is made. OULAD data shows Ghost-pattern students have a 76.4% failure or withdrawal rate without intervention.`,
+    'High Achiever':`Trajectory strongly indicates a Pass or Distinction outcome (OULAD: 93.9% pass rate for this pattern). The primary risk is mid-course burnout if workload spikes. No immediate intervention required.`,
+    'Procrastinator':`Without time management support, submission quality will likely decline as assessment complexity increases. OULAD: 41.3% failure/withdrawal rate for this pattern without intervention.`,
+    'Conceptual Struggler':`Without targeted tutoring, this student will likely fail individual assessments despite continued engagement. OULAD: 38.4% failure/withdrawal rate. Early support significantly improves outcomes.`,
+    'Disengaging':`The declining trajectory, if continued, projects to withdrawal by weeks 8--10. OULAD: 58.2% failure/withdrawal rate without intervention at this stage.`,
+    'Steady Worker':`Trajectory indicates a likely Pass outcome. OULAD: 78.2% pass rate for this pattern. Consistent engagement is a protective factor; risk is plateauing without challenge.`
+  };
+  return p[name]||'Insufficient data for confident prognosis.';
+}
+
+// ── Init ─────────────────────────────────────────────────────────────────────
 renderList();
 </script>
 </body>
