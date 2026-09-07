@@ -526,7 +526,7 @@ function renderCompare() {
 }
 
 
-// ── Why This Pattern — plain English factors ─────────────────────────────────
+// ── Why This Pattern, plain English factors ─────────────────────────────────
 function getWhyFactors(name, m, pat) {
   const validScores = m.scores.filter(v=>v!=null);
   const scoreMean = validScores.length ? (validScores.reduce((a,b)=>a+b,0)/validScores.length).toFixed(0) : 0;
@@ -537,23 +537,23 @@ function getWhyFactors(name, m, pat) {
 
   const factors = {
     'Ghost': [
-      {icon:'📉', label:'Critical disengagement', text:`Only ${m.clicks.toLocaleString()} VLE interactions recorded — well below the cohort average of ~2,400. The student is essentially absent from the platform.`},
+      {icon:'📉', label:'Critical disengagement', text:`Only ${m.clicks.toLocaleString()} VLE interactions recorded, well below the cohort average of ~2,400. The student is essentially absent from the platform.`},
       {icon:'📅', label:'Minimal active presence', text:`Active in only ${m.activeWeeks} out of 10 weeks. Long gaps with zero activity make it impossible to distinguish personal crisis from dropout intent.`},
-      {icon:'📋', label:'Majority of work missed', text:`Submission rate of ${Math.round(m.submitRate*100)}% — most assessed work has not been submitted. Welfare contact is the appropriate first response before any academic intervention.`},
+      {icon:'📋', label:'Majority of work missed', text:`Submission rate of ${Math.round(m.submitRate*100)}%, most assessed work has not been submitted. Welfare contact is the appropriate first response before any academic intervention.`},
     ],
     'High Achiever': [
-      {icon:'🎯', label:'Strong assessment performance', text:`First score of ${m.score1}% with a mean of ${scoreMean}% across all assessments — consistently above the cohort average.`},
+      {icon:'🎯', label:'Strong assessment performance', text:`First score of ${m.score1}% with a mean of ${scoreMean}% across all assessments, consistently above the cohort average.`},
       {icon:'📆', label:'Reliable, consistent engagement', text:`Active across ${m.activeWeeks}/10 weeks with low variability (CoV ${m.cov}). Engagement is evenly distributed rather than concentrated before deadlines.`},
       {icon:'✅', label:'Perfect submission record', text:`${Math.round(m.submitRate*100)}% submission rate with ${m.late} late submissions. On-time, complete work is the hallmark of this pattern.`},
     ],
     'Procrastinator': [
-      {icon:'⏰', label:'Deadline-driven engagement', text:`Engagement CoV of ${m.cov} — very high variability reveals activity spikes just before deadlines rather than consistent week-to-week study.`},
+      {icon:'⏰', label:'Deadline-driven engagement', text:`Engagement CoV of ${m.cov}, very high variability reveals activity spikes just before deadlines rather than consistent week-to-week study.`},
       {icon:'⚠️', label:'Repeated late submissions', text:`${m.late} late submission${m.late!==1?'s':''} on record. The pattern is consistent across assessments, not a one-off event.`},
-      {icon:'📊', label:'Adequate overall activity', text:`Total clicks of ${m.clicks.toLocaleString()} shows the student is engaged — the issue is scheduling, not motivation or ability. Time management coaching addresses the root cause.`},
+      {icon:'📊', label:'Adequate overall activity', text:`Total clicks of ${m.clicks.toLocaleString()} shows the student is engaged, the issue is scheduling, not motivation or ability. Time management coaching addresses the root cause.`},
     ],
     'Conceptual Struggler': [
-      {icon:'🧩', label:'High effort, low return', text:`${m.clicks.toLocaleString()} VLE interactions but scores averaging ${scoreMean}%. The student is clearly trying — the problem is comprehension, not commitment.`},
-      {icon:'📉', label:'Scores not improving', text:`Score trend of ${m.scoreTrend>0?'+':''}${m.scoreTrend}/assessment — no self-correction signal despite sustained engagement. Targeted tutoring is needed.`},
+      {icon:'🧩', label:'High effort, low return', text:`${m.clicks.toLocaleString()} VLE interactions but scores averaging ${scoreMean}%. The student is clearly trying, the problem is comprehension, not commitment.`},
+      {icon:'📉', label:'Scores not improving', text:`Score trend of ${m.scoreTrend>0?'+':''}${m.scoreTrend}/assessment, no self-correction signal despite sustained engagement. Targeted tutoring is needed.`},
       {icon:'🗓️', label:'Consistent attendance', text:`Active ${m.activeWeeks}/10 weeks with low engagement variability (CoV ${m.cov}). Disengagement or motivation can be ruled out as the primary cause.`},
     ],
     'Disengaging': [
@@ -564,7 +564,7 @@ function getWhyFactors(name, m, pat) {
     'Steady Worker': [
       {icon:'📚', label:'Consistent, reliable engagement', text:`${m.clicks.toLocaleString()} total clicks across ${m.activeWeeks}/10 active weeks. Low variability (CoV ${m.cov}) shows study is evenly spread rather than deadline-driven.`},
       {icon:'📋', label:'Good submission behaviour', text:`${Math.round(m.submitRate*100)}% submission rate with only ${m.late} late submission${m.late!==1?'s':''}. Reliable and consistent without being exceptional.`},
-      {icon:'💡', label:'Stable but unchallenged', text:`Score mean of ${scoreMean}% with trend ${m.scoreTrend>0?'+':''}${m.scoreTrend}/assessment. No red flags — enrichment resources may unlock further improvement.`},
+      {icon:'💡', label:'Stable but unchallenged', text:`Score mean of ${scoreMean}% with trend ${m.scoreTrend>0?'+':''}${m.scoreTrend}/assessment. No red flags, enrichment resources may unlock further improvement.`},
     ],
   };
   return factors[name] || factors['Steady Worker'];
